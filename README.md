@@ -77,6 +77,48 @@ There is no way to tell the two roles apart from the annotation alone, so any
 value appearing twice in one expression now aborts the perturbation. That cost
 20 problems and bought correctness.
 
+## The confound, and the control that failed before it worked
+
+Numeric perturbation does not isolate memorisation. **It also changes
+arithmetic difficulty.** A model that fails 847 × 23 and solves 20 × 3 failed
+at arithmetic, not at recall, and an unconstrained substitution produces
+exactly that confound.
+
+So the benchmark has a second mode that holds digit counts fixed on every
+input, intermediate and final answer. The claim attached to it: a residual
+drop cannot be harder sums.
+
+**That claim was false, and measuring it is how I found out.**
+
+| | Original | Variant | Standardised difference |
+|---|---:|---:|---:|
+| Carries | 0.69 | 0.82 | **0.129** |
+| Non-round operands | 4.49 | 5.17 | **0.251** |
+
+Matching digits made the arithmetic *harder* while claiming to hold it fixed —
+and slightly worse than no matching at all. GSM8K leans on round numbers (10
+chickens, 20 dollars, 50 miles) and a random same-decade replacement is almost
+never round. More non-round operands means more carries.
+
+Preserving **roundness** as well as digit count fixes it:
+
+| | Original | Variant | Standardised difference |
+|---|---:|---:|---:|
+| Carries | 0.65 | 0.67 | **0.022** |
+| Non-round operands | 4.33 | 4.34 | **0.003** |
+| Operand digits | 12.83 | 12.84 | **0.001** |
+| Divisions | 0.55 | 0.55 | **0.000** |
+
+Worst standardised difference **0.022**, against the 0.1 convention for
+matched designs — and against **0.239** for the unconstrained set, which is
+the contrast showing the control does something.
+
+It costs coverage: **787 pairs** rather than 1,029. The browser harness runs
+the balanced set by default, because it is the one whose drop means anything.
+
+`scripts/check_balance.py` regenerates both arms from the build seed and
+re-measures, so the control is verified rather than asserted.
+
 ## What this evaluation can and cannot see
 
 Computed before building the harness, because discovering it afterwards is

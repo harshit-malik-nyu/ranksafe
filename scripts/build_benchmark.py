@@ -26,6 +26,9 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--source", default=str(ROOT / "evidence" / "gsm8k-test.jsonl"))
     ap.add_argument("--out", default=str(ROOT / "evidence" / "paired.json"))
+    ap.add_argument("--magnitude-matched", action="store_true",
+                    help="hold digit counts fixed throughout, so a residual "
+                         "drop cannot be arithmetic difficulty")
     args = ap.parse_args()
 
     rows = [json.loads(l) for l in open(args.source)]
@@ -41,7 +44,7 @@ def main() -> int:
     rng = random.Random(args.seed)
     pairs = []
     for p in verified:
-        v = perturb(p, rng)
+        v = perturb(p, rng, magnitude_matched=args.magnitude_matched)
         if v is None:
             continue
         if not validate(p, v):
@@ -58,6 +61,7 @@ def main() -> int:
 
     stats["paired"] = len(pairs)
     stats["seed"] = args.seed
+    stats["magnitude_matched"] = args.magnitude_matched
     stats["answers_differ"] = sum(
         1 for x in pairs if x["original"]["answer"] != x["variant"]["answer"])
 

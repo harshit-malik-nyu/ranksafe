@@ -1,0 +1,74 @@
+{
+  "unconstrained": {
+    "pairs": 1029,
+    "carries": {
+      "original_mean": 0.7055393586005831,
+      "variant_mean": 0.8056365403304179,
+      "standardised_difference": 0.10041714944308969,
+      "balanced": false
+    },
+    "operand_digits": {
+      "original_mean": 13.135082604470359,
+      "variant_mean": 13.313896987366375,
+      "standardised_difference": 0.02447403984002257,
+      "balanced": true
+    },
+    "divisions": {
+      "original_mean": 0.6054421768707483,
+      "variant_mean": 0.6054421768707483,
+      "standardised_difference": 0.0,
+      "balanced": true
+    },
+    "non_round": {
+      "original_mean": 4.558794946550049,
+      "variant_mean": 5.21865889212828,
+      "standardised_difference": 0.23895562201903994,
+      "balanced": false
+    },
+    "steps": {
+      "original_mean": 3.4033041788143827,
+      "variant_mean": 3.4033041788143827,
+      "standardised_difference": 0.0,
+      "balanced": true
+    },
+    "worst_standardised_difference": 0.23895562201903994,
+    "balanced": false,
+    "verdict": "Arms are NOT balanced: the largest standardised difference is 0.239. The control has not done its job and any drop measured on this set is still confounded with arithmetic difficulty."
+  },
+  "magnitude_matched": {
+    "pairs": 787,
+    "carries": {
+      "original_mean": 0.6543837357052097,
+      "variant_mean": 0.6747141041931385,
+      "standardised_difference": 0.022330018855689537,
+      "balanced": true
+    },
+    "operand_digits": {
+      "original_mean": 12.831003811944091,
+      "variant_mean": 12.841168996188056,
+      "standardised_difference": 0.0013578279718230767,
+      "balanced": true
+    },
+    "divisions": {
+      "original_mean": 0.5501905972045743,
+      "variant_mean": 0.5501905972045743,
+      "standardised_difference": 0.0,
+      "balanced": true
+    },
+    "non_round": {
+      "original_mean": 4.332909783989835,
+      "variant_mean": 4.340533672172808,
+      "standardised_difference": 0.002807432107790192,
+      "balanced": true
+    },
+    "steps": {
+      "original_mean": 3.2706480304955527,
+      "variant_mean": 3.2706480304955527,
+      "standardised_difference": 0.0,
+      "balanced": true
+    },
+    "worst_standardised_difference": 0.022330018855689537,
+    "balanced": true,
+    "verdict": "Arms are balanced on arithmetic difficulty \u2014 the largest standardised difference is 0.022, under the 0.1 convention for matched designs. A residual accuracy drop cannot be attributed to harder sums."
+  }
+}

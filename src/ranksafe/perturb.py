@@ -185,7 +185,8 @@ class Variant:
 
 
 def _rewrite_chain(p: Problem, sub: dict[float, float],
-                   tol: float = 1e-9) -> tuple[float, int] | None:
+                   tol: float = 1e-9, keep_digits: bool = False,
+                   original: "Problem | None" = None) -> tuple[float, int] | None:
     """
     Re-run the annotated chain with substituted inputs.
 
@@ -241,6 +242,12 @@ def _rewrite_chain(p: Problem, sub: dict[float, float],
             return None
         if s.result > 0 and got <= 0:
             return None
+        # Magnitude matching applies to intermediates too, or a same-decade
+        # input can still produce a ten-times-larger running total and the
+        # arithmetic gets harder anyway.
+        if keep_digits and (_digits(got) != _digits(s.result)
+                            or _roundness(got) != _roundness(s.result)):
+            return None
         produced[s.result] = got
         last = got
         n += 1
@@ -252,15 +259,73 @@ def _fmt(v: float) -> str:
     return str(int(v)) if abs(v - round(v)) < 1e-9 else f"{v:g}"
 
 
+def _digits(v: float) -> int:
+    return len(str(int(abs(v))))
+
+
+def _roundness(v: float) -> int:
+    """
+    Trailing zeros, capped at two.
+
+    GSM8K leans on round numbers — 10 chickens, 20 dollars, 50 miles — and a
+    random same-decade replacement is almost never round. Measuring the
+    control showed that: substituted arms carried 15% more non-round operands
+    and 19% more carries than the originals, so matching digit counts alone
+    made the arithmetic HARDER while claiming to hold it fixed.
+
+    Preserving roundness is what actually balances it.
+    """
+    if v != int(v) or v == 0:
+        return 0
+    n, z = int(abs(v)), 0
+    while n % 10 == 0 and z < 2:
+        n //= 10
+        z += 1
+    return z
+
+
+def _candidates_like(v: float, rng: random.Random, tries: int = 24):
+    """Same digit count and same roundness as v."""
+    d, r = _digits(v), _roundness(v)
+    lo = 10 ** (d - 1) if d > 1 else 2
+    hi = 10 ** d - 1
+    step = 10 ** r if r else 1
+    out = []
+    for _ in range(tries):
+        c = rng.randint(max(lo, step) // step, max(1, hi // step)) * step
+        if c != v and c >= 2 and _digits(c) == d and _roundness(c) == r:
+            out.append(float(c))
+    return out
+
+
 def perturb(p: Problem, rng: random.Random, *,
             scale: tuple[float, float] = (0.5, 2.0),
-            attempts: int = 40) -> Variant | None:
+            attempts: int = 40,
+            magnitude_matched: bool = False) -> Variant | None:
     """
     Produce one valid numeric variant, or None if the problem resists it.
 
     Returning None is common and correct. Many problems have numbers that
     appear in prose rather than as operands, or chains this method cannot
     follow, and a variant forced through those is worse than no variant.
+
+    magnitude_matched controls the confound that decides whether this
+    benchmark measures what it claims
+    ------------------------------------------------------------------
+    Numeric perturbation does not isolate memorisation. It also changes
+    arithmetic difficulty: a model that fails 847 x 23 and solves 20 x 3
+    failed at arithmetic, not at recall, and an unconstrained substitution
+    produces exactly that confound.
+
+    With this set, every substituted value keeps its **digit count** and
+    every recomputed intermediate keeps its digit count too. 16 may become
+    23 but not 230; an intermediate of 9 may become 7 but not 94. The
+    arithmetic stays the same size, so a residual drop cannot be explained
+    by harder sums.
+
+    Both modes are built, because the comparison between them is the
+    evidence. If drops collapse under matching, the unconstrained signal was
+    arithmetic difficulty and the benchmark was measuring the wrong thing.
     """
     if not verify_chain(p):
         return None
@@ -284,14 +349,25 @@ def perturb(p: Problem, rng: random.Random, *,
                                             rng.choice([1, 1, 2])))
         sub = {}
         for v in pick:
-            lo, hi = max(2.0, v * scale[0]), v * scale[1]
-            nv = float(rng.randint(int(lo), max(int(lo) + 1, int(hi))))
+            if magnitude_matched:
+                # Same digit count AND same roundness. Digits alone left the
+                # variant arm with measurably more carries and non-round
+                # operands than the original, which is the confound the
+                # control exists to remove.
+                cands = _candidates_like(v, rng)
+                if not cands:
+                    continue
+                nv = rng.choice(cands)
+            else:
+                lo, hi = max(2.0, v * scale[0]), v * scale[1]
+                nv = float(rng.randint(int(lo), max(int(lo) + 1, int(hi))))
             if nv != v:
                 sub[v] = nv
         if not sub:
             continue
 
-        out = _rewrite_chain(p, sub)
+        out = _rewrite_chain(p, sub, keep_digits=magnitude_matched,
+                             original=p)
         if out is None:
             continue
         new_final, n = out

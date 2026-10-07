@@ -166,3 +166,66 @@ class TestTheBuiltBenchmark:
 
     def test_it_is_reproducible_from_the_seed(self, built):
         assert built["stats"]["seed"] == 7
+
+
+class TestMagnitudeMatching:
+    """
+    The control that decides whether this benchmark measures what it claims.
+
+    Numeric perturbation does not isolate memorisation — it also changes
+    arithmetic difficulty. A model that fails 847 x 23 and solves 20 x 3
+    failed at arithmetic, not recall. Matching digit counts throughout holds
+    the arithmetic fixed so a residual drop cannot be explained that way.
+    """
+
+    def test_substituted_inputs_keep_their_digit_count(self):
+        from ranksafe.perturb import _digits
+        p = parse("x", JANET_Q, JANET_A)
+        for seed in range(30):
+            v = perturb(p, random.Random(seed), magnitude_matched=True)
+            if not v:
+                continue
+            for old, new in v.substitutions.items():
+                assert _digits(old) == _digits(new), f"{old} -> {new}"
+
+    def test_the_final_answer_keeps_its_digit_count(self):
+        """
+        Matching inputs is not enough: a same-decade input can still produce
+        a ten-times-larger running total, and then the arithmetic got harder
+        anyway.
+        """
+        from ranksafe.perturb import _digits
+        p = parse("x", JANET_Q, JANET_A)
+        for seed in range(30):
+            v = perturb(p, random.Random(seed), magnitude_matched=True)
+            if v:
+                assert _digits(v.final) == _digits(v.original_final)
+
+    def test_matching_costs_coverage_and_is_worth_it(self):
+        """
+        Fewer problems survive the stricter constraint. That is the price of
+        the control and it is small: 912 against 1,027 on the full set.
+        """
+        rows = [json.loads(l)
+                for l in open(ROOT / "evidence" / "gsm8k-test.jsonl")][:150]
+        ps = [parse(str(i), r["question"], r["answer"])
+              for i, r in enumerate(rows)]
+        verified = [p for p in ps if p.usable and verify_chain(p)]
+        loose = sum(1 for p in verified
+                    if perturb(p, random.Random(7)) is not None)
+        tight = sum(1 for p in verified
+                    if perturb(p, random.Random(7),
+                               magnitude_matched=True) is not None)
+        assert tight < loose
+        assert tight > loose * 0.7
+
+    def test_both_sets_are_built_and_committed(self):
+        from ranksafe.perturb import _digits
+        p = ROOT / "evidence" / "paired-matched.json"
+        if not p.exists():
+            pytest.skip("matched set not built")
+        d = json.loads(p.read_text())
+        assert d["stats"]["magnitude_matched"] is True
+        for pair in d["pairs"][:300]:
+            assert _digits(pair["original"]["answer"]) == \
+                   _digits(pair["variant"]["answer"])
