@@ -139,7 +139,8 @@ class ModelResult:
 
 
 def rank_stability(results: list[ModelResult],
-                   min_margin: float = 0.0) -> dict:
+                   min_margin: float = 0.0,
+                   check_power: bool = True) -> dict:
     """
     Does the ordering survive perturbation?
 
@@ -168,6 +169,13 @@ def rank_stability(results: list[ModelResult],
                        "margin_variant": after,
                        "flipped": flipped})
 
+    # What could this run have seen? Without it, "no flips" reads as
+    # "the ranking held" when it may mean "we could not have detected one".
+    power = None
+    if check_power and results:
+        from .power import detectable
+        power = detectable(results[0].original.n)
+
     return {
         "models": len(results),
         "pairs_considered": considered,
@@ -175,11 +183,13 @@ def rank_stability(results: list[ModelResult],
         "flip_rate": flips / considered if considered else 0.0,
         "min_margin": min_margin,
         "pairs": detail,
-        "verdict": _verdict(flips, considered, results),
+        "power": power,
+        "verdict": _verdict(flips, considered, results, power),
     }
 
 
-def _verdict(flips: int, considered: int, results: list[ModelResult]) -> str:
+def _verdict(flips: int, considered: int, results: list[ModelResult],
+             power: dict | None = None) -> str:
     worst = max((r.parser_asymmetry for r in results), default=0.0)
     if worst > 0.05:
         return (f"Unusable: the parser failed {worst*100:.1f} points more often "
@@ -188,12 +198,24 @@ def _verdict(flips: int, considered: int, results: list[ModelResult]) -> str:
                 "before any of these numbers mean anything.")
     if considered == 0:
         return "No pairs were separated enough to have an ordering."
-    if flips == 0:
-        drops = [r.drop for r in results]
-        return (f"The ordering held on every pair. Scores moved by "
-                f"{min(drops)*100:+.1f} to {max(drops)*100:+.1f} points, but "
-                "no model overtook another — the table is decision-grade even "
-                "where the absolute numbers are not.")
-    return (f"{flips} of {considered} orderings flipped. A table that reorders "
-            "when the numbers in the questions change is not a basis for "
-            "choosing a model, whatever caused it.")
+
+    drops = [r.drop for r in results]
+    span = f"{min(drops)*100:+.1f} to {max(drops)*100:+.1f} points"
+
+    if flips:
+        return (f"{flips} of {considered} orderings flipped. A table that "
+                "reorders when the numbers in the questions change is not a "
+                "basis for choosing a model, whatever caused it.")
+
+    # No flips. Whether that is a finding depends entirely on whether one
+    # could have been seen, and a run this size usually could not.
+    if power:
+        floor = power["smallest_detectable_flip"]
+        return (f"No ordering flipped, and this run could not have detected "
+                f"one smaller than {floor*100:.1f} points — so that is a "
+                "statement about the sample, not about the leaderboard. "
+                f"Scores moved by {span}. Detecting a flip the size the "
+                "literature reports needs roughly four times the items of "
+                "detecting the drop itself.")
+    return (f"The ordering held on every pair. Scores moved by {span}, but no "
+            "model overtook another.")

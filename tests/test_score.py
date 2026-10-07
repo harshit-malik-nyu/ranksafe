@@ -86,9 +86,9 @@ class TestRankStability:
 
     def test_a_held_ordering_is_reported_as_decision_grade(self):
         rs = [self._m("a", 0.90, 0.80), self._m("b", 0.70, 0.60)]
-        out = rank_stability(rs)
+        out = rank_stability(rs, check_power=False)
         assert out["flips"] == 0
-        assert "decision-grade" in out["verdict"]
+        assert "no model overtook another" in out["verdict"]
 
     def test_a_flip_is_caught(self):
         rs = [self._m("a", 0.80, 0.60), self._m("b", 0.75, 0.70)]
@@ -102,7 +102,7 @@ class TestRankStability:
         points is survivable; one overtaking another is not.
         """
         rs = [self._m("a", 0.90, 0.70), self._m("b", 0.70, 0.50)]
-        out = rank_stability(rs)
+        out = rank_stability(rs, check_power=False)
         assert out["flips"] == 0
         assert all(r.drop > 0.15 for r in rs)
 
@@ -124,3 +124,44 @@ class TestRankStability:
 
     def test_one_model_is_not_a_ranking(self):
         assert "at least two models" in rank_stability([self._m("a", .9, .8)])["note"]
+
+
+class TestUnderpoweredRunsSaySo:
+    """
+    The distinction that decides whether this project reports a truth or a
+    comfortable non-result. "No flips" and "the ranking held" are different
+    claims, and a run of forty items can only support the first.
+    """
+
+    def _m(self, name, o, v, n):
+        r = ModelResult(name)
+        r.original = ArmScore(n=n, right=round(o * n))
+        r.variant = ArmScore(n=n, right=round(v * n))
+        return r
+
+    def test_a_small_run_refuses_to_claim_stability(self):
+        rs = [self._m("a", 0.90, 0.85, 40), self._m("b", 0.70, 0.66, 40)]
+        out = rank_stability(rs)
+        assert out["flips"] == 0
+        assert "statement about the sample, not about the leaderboard" in out["verdict"]
+
+    def test_the_detectable_floor_is_reported(self):
+        rs = [self._m("a", 0.90, 0.85, 40), self._m("b", 0.70, 0.66, 40)]
+        out = rank_stability(rs)
+        assert out["power"]["smallest_detectable_flip"] > 0.3
+
+    def test_a_flip_still_reports_as_a_flip(self):
+        """
+        Power qualifies a null result, not a positive one: seeing a flip in a
+        small sample is still seeing a flip.
+        """
+        rs = [self._m("a", 0.80, 0.60, 40), self._m("b", 0.75, 0.70, 40)]
+        out = rank_stability(rs)
+        assert out["flips"] == 1
+        assert "not a basis for choosing a model" in out["verdict"]
+
+    def test_power_can_be_switched_off_for_unit_tests(self):
+        rs = [self._m("a", 0.90, 0.80, 100), self._m("b", 0.70, 0.60, 100)]
+        out = rank_stability(rs, check_power=False)
+        assert out["power"] is None
+        assert "no model overtook another" in out["verdict"]

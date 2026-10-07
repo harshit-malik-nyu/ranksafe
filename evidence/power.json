@@ -1,0 +1,55 @@
+{
+  "plan": [
+    {
+      "effect_points": 20.0,
+      "items_for_drop": 40,
+      "items_for_flip": 160,
+      "calls_for_flip": 960,
+      "minutes": 40.0
+    },
+    {
+      "effect_points": 10.0,
+      "items_for_drop": 157,
+      "items_for_flip": 628,
+      "calls_for_flip": 3768,
+      "minutes": 157.0
+    },
+    {
+      "effect_points": 5.0,
+      "items_for_drop": 628,
+      "items_for_flip": 2512,
+      "calls_for_flip": 15072,
+      "minutes": 628.0
+    }
+  ],
+  "budgets": [
+    {
+      "items": 40,
+      "power": 0.8,
+      "smallest_detectable_drop": 0.19810303581722316,
+      "smallest_detectable_flip": 0.3962060716344463,
+      "note": "A flip is an interaction and needs four times the sample of a drop of the same size."
+    },
+    {
+      "items": 100,
+      "power": 0.8,
+      "smallest_detectable_drop": 0.1252913609152682,
+      "smallest_detectable_flip": 0.2505827218305364,
+      "note": "A flip is an interaction and needs four times the sample of a drop of the same size."
+    },
+    {
+      "items": 200,
+      "power": 0.8,
+      "smallest_detectable_drop": 0.08859437092727732,
+      "smallest_detectable_flip": 0.17718874185455463,
+      "note": "A flip is an interaction and needs four times the sample of a drop of the same size."
+    },
+    {
+      "items": 400,
+      "power": 0.8,
+      "smallest_detectable_drop": 0.0626456804576341,
+      "smallest_detectable_flip": 0.1252913609152682,
+      "note": "A flip is an interaction and needs four times the sample of a drop of the same size."
+    }
+  ]
+}

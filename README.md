@@ -77,6 +77,44 @@ There is no way to tell the two roles apart from the annotation alone, so any
 value appearing twice in one expression now aborts the perturbation. That cost
 20 problems and bought correctness.
 
+## What this evaluation can and cannot see
+
+Computed before building the harness, because discovering it afterwards is
+how underpowered results get reported as findings.
+
+The comparison is **paired** — each model answers the same problem in both
+arms — so the relevant quantity is discordant pairs and McNemar applies. That
+makes it far cheaper than an unpaired comparison. It is still not cheap.
+
+| Target effect | Items for a drop | Items for a flip | Calls across 3 tiers | Minutes |
+|---:|---:|---:|---:|---:|
+| 20pp | 40 | 160 | 960 | 40 |
+| 10pp | 157 | 628 | 3,768 | **157** |
+| 5pp | 628 | 2,512 | 15,072 | **628** |
+
+**A rank flip is an interaction** — a difference of differences — and needs
+roughly **four times** the sample of a main effect the same size. A run
+powered to see a ten-point drop is not powered to see a ten-point change in a
+gap, and conflating those is the easiest way to report noise as a reordering.
+
+What a browser-patience budget buys:
+
+| Items | Detects a drop of | Detects a flip of |
+|---:|---:|---:|
+| 40 | 19.8pp | 39.6pp |
+| 100 | 12.5pp | 25.1pp |
+| 200 | 8.9pp | 17.7pp |
+| 400 | 6.3pp | 12.5pp |
+
+The literature reports drops up to **13pp** for the worst-overfitting models
+and around **1pp** for frontier ones. So a run of this scale can see the first
+and **cannot see the second at any feasible size** — 1pp would need roughly
+15,700 items.
+
+**This is wired into the verdict.** A run that finds no flips reports that it
+could not have detected one below its floor, rather than reporting that the
+ranking held. Those are different claims and only the first is available here.
+
 ## Status
 
 The paired benchmark is built and committed. What is **not** done: running
