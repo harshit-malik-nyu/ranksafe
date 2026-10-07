@@ -9,6 +9,7 @@ ORDER move — is not the question that data was published to answer.
 
 from __future__ import annotations
 
+import inspect
 from pathlib import Path
 
 import pytest
@@ -108,16 +109,12 @@ class TestWhoFalls:
 class TestHonesty:
 
     def test_the_prompt_caveat_is_carried(self):
-        import inspect
-
         from ranksafe import published
         doc = " ".join(published.__doc__.split())
         assert "one standardised prompt rather than each model's best" in doc
         assert "do not match published benchmark figures" in doc
 
     def test_it_is_marked_as_someone_elses_measurements(self):
-        import inspect
-
         from ranksafe import published
         doc = " ".join(published.__doc__.split())
         assert "It uses someone else's measurements" in doc
