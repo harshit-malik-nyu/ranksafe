@@ -62,9 +62,10 @@ def main() -> int:
                 x = b[f]
                 print(f"    {f:16s} {x['original_mean']:>7.2f} -> "
                       f"{x['variant_mean']:>7.2f}   smd {x['standardised_difference']:.3f}"
-                      f"  {'balanced' if x['balanced'] else 'IMBALANCED'}")
-        print(f"    worst smd {b['worst_standardised_difference']:.3f} -> "
-              f"{'BALANCED' if b['balanced'] else 'NOT BALANCED'}")
+                      f"  (95% upper {x['upper_95']:.3f})"
+                      f"  {'ok' if x['balanced'] else 'NOT EXCLUDED'}")
+        print(f"    worst 95% upper {b['worst_standardised_difference_upper_95']:.3f}"
+              f" -> {'BALANCED' if b['balanced'] else 'IMBALANCE NOT EXCLUDED'}")
 
     Path(args.out).write_text(json.dumps(out, indent=2))
     return 0

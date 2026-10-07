@@ -61,9 +61,9 @@ class TestBalance:
                         divisions=1, non_round=nonround) for _ in range(n)]
 
     def test_identical_arms_are_balanced(self):
-        b = balance(self._p(1), self._p(1))
+        b = balance(self._p(1, n=3000), self._p(1, n=3000))
         assert b["balanced"]
-        assert "cannot be attributed to harder sums" in b["verdict"]
+        assert "imbalance above 0.1 is excluded" in b["verdict"]
 
     def test_a_shifted_arm_is_caught(self):
         """
@@ -98,21 +98,38 @@ class TestTheCommittedBalance:
             pytest.skip("balance not measured")
         return json.loads(p.read_text())
 
-    def test_the_matched_set_is_balanced(self, measured):
+    def test_the_matched_set_balances_on_point_estimates(self, measured):
         """
-        THE CONTROL, VERIFIED. If this fails, the benchmark's central claim —
-        that a residual drop is not arithmetic difficulty — is unsupported.
+        THE CONTROL. Every component's standardised difference sits near
+        zero — 0.026 at worst against 0.228 unconstrained.
         """
         m = measured["magnitude_matched"]
-        assert m["balanced"]
-        assert m["worst_standardised_difference"] < 0.1
+        assert m["point_estimates_balanced"]
+        assert m["worst_standardised_difference"] < 0.05
 
-    def test_the_unconstrained_set_is_not(self, measured):
+    def test_the_sample_cannot_certify_it_and_says_so(self, measured):
         """
-        The contrast is the evidence that the control does something. If both
-        arms balanced without it, matching would be pointless.
+        The distinction a tick or a cross would destroy. At n=787 a 95%
+        interval on a standardised difference is about 0.099 wide, so a point
+        estimate of 0.026 cannot be shown below the 0.1 convention however
+        well matched the arms are. The verdict reports what would be needed
+        rather than claiming certification it does not have.
         """
-        assert not measured["unconstrained"]["balanced"]
+        m = measured["magnitude_matched"]
+        assert not m["balanced"]
+        assert "the sample cannot prove it" in m["verdict"]
+        assert "pairs, which this dataset does not yield" in m["verdict"]
+
+    def test_the_unconstrained_set_is_genuinely_imbalanced(self, measured):
+        """
+        The contrast is the evidence that the control does something. Not
+        merely uncertified — its point estimates are an order of magnitude
+        larger, 0.228 against 0.026.
+        """
+        u, m = measured["unconstrained"], measured["magnitude_matched"]
+        assert not u["point_estimates_balanced"]
+        assert u["worst_standardised_difference"] > 5 * \
+               m["worst_standardised_difference"]
 
     def test_matching_costs_coverage(self, measured):
         assert measured["magnitude_matched"]["pairs"] < \

@@ -131,10 +131,30 @@ document.getElementById("run").addEventListener("click", async () => {
   try{
     const sample = await getSample();
     if(!sample) throw new Error("Claude is not available in this view, so the benchmark cannot run. It does not simulate a model.");
-    for(const tier of tiers){
-      const r = {model:tier, o:{n:0,right:0,un:0}, v:{n:0,right:0,un:0}};
-      for(const it of items){
-        for(const [arm, q, a] of [["o", it.q, it.a], ["v", it.qv, it.av]]){
+    // Interleave tiers and randomise arm order.
+    //
+    // Running all of tier A then all of tier B confounds the tier with
+    // anything that drifts during the run — service load, rate limiting,
+    // a model being swapped behind the endpoint. And asking the original
+    // before the variant every time makes arm order perfectly collinear
+    // with arm, so any order effect lands entirely on the measured drop.
+    //
+    // Calls carry no conversation history, so neither should matter. Both
+    // are cheap to remove and a reviewer should not have to take "shouldn't
+    // matter" on trust.
+    const schedule = [];
+    for(const it of items) for(const tier of tiers){
+      const arms = [["o", it.q, it.a], ["v", it.qv, it.av]];
+      if(Math.random() < 0.5) arms.reverse();
+      schedule.push([tier, arms]);
+    }
+    const byTier = {};
+    for(const tier of tiers) byTier[tier] = {model:tier, o:{n:0,right:0,un:0}, v:{n:0,right:0,un:0}};
+
+    {
+      for(const [tier, arms] of schedule){
+        const r = byTier[tier];
+        for(const [arm, q, a] of arms){
           r[arm].n++;
           let text = "";
           try{ text = (await sample(PROMPT + q, {modelTier: tier, cache:false})).text || ""; }
@@ -145,7 +165,7 @@ document.getElementById("run").addEventListener("click", async () => {
           done++; prog.value = (done/total)*100;
         }
       }
-      results.push(r);
+      for(const tier of tiers) results.push(byTier[tier]);
     }
   }catch(e){
     err.textContent = String(e.message||e); err.hidden=false;

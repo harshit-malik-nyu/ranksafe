@@ -120,20 +120,61 @@ def balance(originals: list[Profile], variants: list[Profile]) -> dict:
         ma, mb = fmean(a), fmean(b)
         sd = ((pstdev(a) ** 2 + pstdev(b) ** 2) / 2) ** 0.5
         smd = abs(ma - mb) / sd if sd > 0 else 0.0
-        worst = max(worst, smd)
+
+        # A standardised difference is an estimate and needs its precision
+        # attached. "Balanced at 0.022" from thirty pairs would be a
+        # different statement from the same number at eight hundred, and a
+        # reader cannot tell them apart without this.
+        n1, n2 = len(a), len(b)
+        se = ((n1 + n2) / (n1 * n2) + smd ** 2 / (2 * (n1 + n2))) ** 0.5
+        upper = smd + 1.96 * se
+
+        worst = max(worst, upper)
         out[field] = {"original_mean": ma, "variant_mean": mb,
                       "standardised_difference": smd,
-                      "balanced": smd < 0.1}
+                      "upper_95": upper, "n": n1,
+                      # Judged on the upper bound, not the point estimate:
+                      # a design is balanced if imbalance can be excluded,
+                      # not if the sample happened to land near zero.
+                      "balanced": upper < 0.1}
 
-    out["worst_standardised_difference"] = worst
+    point = max((v["standardised_difference"] for v in out.values()
+                 if isinstance(v, dict)), default=0.0)
+    n = max((v.get("n", 0) for v in out.values() if isinstance(v, dict)),
+            default=0)
+
+    out["worst_standardised_difference"] = point
+    out["worst_standardised_difference_upper_95"] = worst
+    out["n"] = n
     out["balanced"] = worst < 0.1
-    out["verdict"] = (
-        f"Arms are balanced on arithmetic difficulty — the largest "
-        f"standardised difference is {worst:.3f}, under the 0.1 convention "
-        "for matched designs. A residual accuracy drop cannot be attributed "
-        "to harder sums."
-        if worst < 0.1 else
-        f"Arms are NOT balanced: the largest standardised difference is "
-        f"{worst:.3f}. The control has not done its job and any drop measured "
-        "on this set is still confounded with arithmetic difficulty.")
+    out["point_estimates_balanced"] = point < 0.05
+
+    # Three states, not two.
+    #
+    # "Balanced" and "imbalance excluded" are different claims, and at this
+    # sample size only the first is available. A 95% interval on a
+    # standardised difference has a half-width near 0.099 at n=788, so a
+    # point estimate of 0.02 cannot be certified below the 0.1 convention
+    # however well matched the arms actually are. Collapsing that into a
+    # tick or a cross would misreport one way or the other.
+    if worst < 0.1:
+        verdict = (f"Balanced, and imbalance above 0.1 is excluded: the "
+                   f"largest standardised difference is {point:.3f} with a "
+                   f"95% upper bound of {worst:.3f}. A residual accuracy drop "
+                   "cannot be attributed to harder sums.")
+    elif point < 0.05:
+        need = int(2 / ((0.1 - point) / 1.96) ** 2) if point < 0.1 else 0
+        verdict = (f"Point estimates show balance — the largest standardised "
+                   f"difference is {point:.3f} — but at n={n} the 95% upper "
+                   f"bound is {worst:.3f}, so imbalance at the 0.1 convention "
+                   f"is not excluded. Certifying it would need about "
+                   f"{need:,} pairs, which this dataset does not yield. The "
+                   "honest claim is that the arms look balanced and the "
+                   "sample cannot prove it.")
+    else:
+        verdict = (f"NOT balanced: the largest standardised difference is "
+                   f"{point:.3f} (95% upper {worst:.3f}). The control has not "
+                   "done its job and any drop measured on this set is still "
+                   "confounded with arithmetic difficulty.")
+    out["verdict"] = verdict
     return out

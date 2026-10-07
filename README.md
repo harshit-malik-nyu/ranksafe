@@ -109,15 +109,36 @@ Preserving **roundness** as well as digit count fixes it:
 | Operand digits | 12.83 | 12.84 | **0.001** |
 | Divisions | 0.55 | 0.55 | **0.000** |
 
-Worst standardised difference **0.022**, against the 0.1 convention for
-matched designs — and against **0.239** for the unconstrained set, which is
-the contrast showing the control does something.
+Worst point estimate **0.026**, against **0.228** for the unconstrained set.
+
+### "Balanced" and "imbalance excluded" are different claims
+
+A standardised difference is an estimate and needs its precision attached. At
+n=787 a 95% interval on one is about **0.099 wide**, so a point estimate of
+0.026 has an upper bound of 0.125 and **cannot be certified below the 0.1
+convention however well matched the arms actually are**. Certifying it would
+need roughly **1,421 pairs**, which this dataset does not yield.
+
+So the honest claim is the middle one of three, and the code reports it as
+such: *the arms look balanced and the sample cannot prove it.* The contrast
+still carries the argument — the unconstrained set is not merely uncertified,
+its point estimates are an order of magnitude larger.
 
 It costs coverage: **787 pairs** rather than 1,029. The browser harness runs
 the balanced set by default, because it is the one whose drop means anything.
 
 `scripts/check_balance.py` regenerates both arms from the build seed and
 re-measures, so the control is verified rather than asserted.
+
+### Order effects, removed rather than argued away
+
+The harness interleaves model tiers instead of running one to completion, and
+randomises which arm of each pair is asked first. Calls carry no conversation
+history so neither should matter — but running all of tier A then all of tier
+B confounds the tier with anything that drifts during the run, and asking the
+original first every time makes arm order perfectly collinear with arm. Both
+are free to remove, and a reviewer should not have to take *shouldn't matter*
+on trust.
 
 ## What this evaluation can and cannot see
 
