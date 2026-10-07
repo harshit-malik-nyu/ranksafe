@@ -302,6 +302,32 @@ held-out replica — one reordering in 1,723 pairs separated by five points or
 more. Whether the reorderings that do occur concentrate in contaminated
 families points the right way and rests on six models.
 
+### The transcription is verified against columns it does not contain
+
+63 rows of two numbers were typed out of a PDF. One typo corrupts every figure
+downstream, and the result would not look wrong — it would look like a finding.
+
+The paper publishes **Diff** and a **Z-score** per model. Only the two
+accuracies were transcribed, so recomputing those two columns checks the
+transcription using data it does not include.
+
+| Check | Result |
+|---|---|
+| Diff — an exact identity | **0 mismatches in 63** |
+| Z — inside what 3-decimal rounding allows | **0 outside in 63** |
+
+Diff is the strong check: any disagreement is a typo, and there are none. Z is
+weak and treated as weak — the paper does not say whether its two-proportion
+test pools the variance, and trying both, pooled is closer on 32 rows and
+unpooled on 31, so the formula is not recoverable and does not need to be.
+
+A **fixed tolerance was the first attempt and was wrong.** `gpt2-xl` scores
+0.009 and 0.007, where the printing's half-thousandth is a quarter of the
+difference and the implied Z spans 0.281 to 0.842. A tolerance loose enough
+for that row is meaningless for every other. Each accuracy now stands for an
+interval and the published Z must fall inside the range those imply — tight
+where the data is precise, wide only where the printing leaves it wide.
+
 *Accuracies from Zhang et al., NeurIPS 2024 Datasets and Benchmarks Track,
 arXiv:2405.00332, Appendix F. They come from one standardised prompt rather
 than each model's best, so they do not match published benchmark figures; what

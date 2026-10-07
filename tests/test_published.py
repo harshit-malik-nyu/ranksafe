@@ -10,6 +10,7 @@ ORDER move — is not the question that data was published to answer.
 from __future__ import annotations
 
 import inspect
+import json
 from pathlib import Path
 
 import pytest
@@ -215,3 +216,48 @@ class TestMultipleComparisons:
         v = test_all_reversals(data, 0.03)["verdict"]
         assert "real swings" in v
         assert "separate question this sample cannot settle" in v
+
+
+class TestTranscription:
+    """
+    63 rows of two numbers were typed out of a PDF. One typo corrupts every
+    figure downstream and the analysis would not look wrong — it would look
+    like a result.
+    """
+
+    @pytest.fixture(scope="class")
+    def check(self):
+        p = ROOT / "evidence" / "transcription_check.json"
+        if not p.exists():
+            pytest.skip("transcription not verified")
+        return json.loads(p.read_text())
+
+    def test_every_row_was_checked(self, check):
+        assert check["rows_checked"] == 63
+
+    def test_diff_reproduces_exactly(self, check):
+        """
+        The strong check. Diff is an identity — GSM8k minus GSM1k — so any
+        disagreement is a typo, and there are none.
+        """
+        assert check["diff_mismatches"] == []
+
+    def test_z_falls_inside_what_the_rounding_allows(self, check):
+        """
+        The weak check, treated as weak — and scale-free.
+
+        A fixed tolerance was the first attempt and was wrong: gpt2-xl scores
+        0.009 and 0.007, where the printing's half-thousandth is a quarter of
+        the difference and the implied Z spans 0.281 to 0.842. A tolerance
+        loose enough for that row is meaningless for the rest.
+
+        Each accuracy stands for an interval instead, and the published Z
+        must fall inside the range those intervals imply.
+        """
+        assert check["z_mismatches"] == []
+
+    def test_the_check_uses_columns_the_transcription_does_not_contain(self, check):
+        assert "columns they do not contain" in check["method"]
+
+    def test_it_is_verified(self, check):
+        assert check["verified"]

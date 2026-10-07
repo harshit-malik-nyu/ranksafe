@@ -1,0 +1,9 @@
+{
+  "rows_checked": 63,
+  "diff_mismatches": [],
+  "z_mismatches": [],
+  "missing": [],
+  "worst_z_deviation": 0.21619218392442885,
+  "verified": true,
+  "method": "Diff and Z-score were transcribed separately from the accuracies and recomputed from them. Agreement on both checks the accuracies using columns they do not contain."
+}
