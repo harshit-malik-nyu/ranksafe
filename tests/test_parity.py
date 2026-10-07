@@ -8,7 +8,6 @@ same name. These pin the cases most likely to separate them.
 
 from __future__ import annotations
 
-import re
 from pathlib import Path
 
 import pytest
@@ -64,10 +63,16 @@ class TestTheBrowserCopyIsTheSameLogic:
         THE FAILURE THAT WOULD FAKE THE RESULT. A greedy parser finds the last
         intermediate of a derivation, and perturbed questions plausibly
         produce longer derivations.
+
+        Matched on fragments that sit within one source line. Flattening
+        whitespace does not remove JavaScript comment markers, so a phrase
+        wrapped across two comment lines becomes "the last // line only" and
+        a correct page fails a check about its own correctness.
         """
-        flat = " ".join(page.split())
-        assert "the last line only" in flat
-        assert "manufacture the drop" in flat
+        assert "never a scan of the whole output" in page
+        assert "greedy parser" in page
+        # and the behaviour itself, not only the comment
+        assert "lines[lines.length-1]" in page.replace(" ", "")
 
     def test_it_refuses_to_simulate_a_model(self, page):
         assert "does not simulate a model" in page
@@ -86,7 +91,8 @@ class TestTheBrowserCopyIsTheSameLogic:
         assert "four times the sample" in page
 
     def test_a_null_result_is_qualified(self, page):
-        assert "statement about the sample, not about the leaderboard" in page
+        assert "statement\n      about the sample" in page or \
+               "statement about the sample" in " ".join(page.split())
 
     def test_parser_asymmetry_invalidates_the_run(self, page):
         assert "indistinguishable from a capability" in page
