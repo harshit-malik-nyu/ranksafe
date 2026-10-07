@@ -1,100 +1,152 @@
 {
+  "across_seeds": {
+    "unconstrained": {
+      "seeds": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "worst_point_estimates": [
+        0.23889473964514232,
+        0.23997215627741472,
+        0.24457512561313965,
+        0.22002157276903078,
+        0.22058296452715306
+      ],
+      "max_across_seeds": 0.24457512561313965,
+      "pairs_per_seed": [
+        1029,
+        1030,
+        1038,
+        1029,
+        1025
+      ],
+      "stable": false
+    },
+    "magnitude_matched": {
+      "seeds": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "worst_point_estimates": [
+        0.025072312929715762,
+        0.014417469323941045,
+        0.021730487231070083,
+        0.035839085362816034,
+        0.026277757689782827
+      ],
+      "max_across_seeds": 0.035839085362816034,
+      "pairs_per_seed": [
+        788,
+        799,
+        800,
+        806,
+        787
+      ],
+      "stable": true
+    }
+  },
   "unconstrained": {
-    "pairs": 1027,
+    "pairs": 1029,
     "carries": {
-      "original_mean": 0.7049659201557936,
-      "variant_mean": 0.813047711781889,
-      "standardised_difference": 0.11003547498985967,
-      "upper_95": 0.1965948767088394,
-      "n": 1027,
+      "original_mean": 0.7055393586005831,
+      "variant_mean": 0.8134110787172012,
+      "standardised_difference": 0.1077160329331132,
+      "upper_95": 0.19418854818603884,
+      "n": 1029,
       "balanced": false
     },
     "operand_digits": {
-      "original_mean": 13.132424537487829,
-      "variant_mean": 13.326192794547225,
-      "standardised_difference": 0.026644313386897364,
-      "upper_95": 0.11314212423787717,
-      "n": 1027,
+      "original_mean": 13.135082604470359,
+      "variant_mean": 13.322643343051507,
+      "standardised_difference": 0.02564952063995628,
+      "upper_95": 0.11206294960047793,
+      "n": 1029,
       "balanced": false
     },
     "divisions": {
-      "original_mean": 0.6046738072054528,
-      "variant_mean": 0.6046738072054528,
+      "original_mean": 0.6054421768707483,
+      "variant_mean": 0.6054421768707483,
       "standardised_difference": 0.0,
-      "upper_95": 0.08649397320157481,
-      "n": 1027,
+      "upper_95": 0.08640987597877146,
+      "n": 1029,
       "balanced": true
     },
     "non_round": {
-      "original_mean": 4.568646543330088,
-      "variant_mean": 5.197663096397274,
-      "standardised_difference": 0.22767015031302065,
-      "upper_95": 0.31444387750168645,
-      "n": 1027,
+      "original_mean": 4.558794946550049,
+      "variant_mean": 5.21865889212828,
+      "standardised_difference": 0.23889473964514232,
+      "upper_95": 0.32561228487209226,
+      "n": 1029,
       "balanced": false
     },
     "steps": {
-      "original_mean": 3.4079844206426486,
-      "variant_mean": 3.4079844206426486,
+      "original_mean": 3.4033041788143827,
+      "variant_mean": 3.4033041788143827,
       "standardised_difference": 0.0,
-      "upper_95": 0.08649397320157481,
-      "n": 1027,
+      "upper_95": 0.08640987597877146,
+      "n": 1029,
       "balanced": true
     },
-    "worst_standardised_difference": 0.22767015031302065,
-    "worst_standardised_difference_upper_95": 0.31444387750168645,
-    "n": 1027,
+    "worst_standardised_difference": 0.23889473964514232,
+    "worst_standardised_difference_upper_95": 0.32561228487209226,
+    "n": 1029,
     "balanced": false,
     "point_estimates_balanced": false,
-    "verdict": "NOT balanced: the largest standardised difference is 0.228 (95% upper 0.314). The control has not done its job and any drop measured on this set is still confounded with arithmetic difficulty."
+    "verdict": "NOT balanced: the largest standardised difference is 0.239 (95% upper 0.326). The control has not done its job and any drop measured on this set is still confounded with arithmetic difficulty."
   },
   "magnitude_matched": {
-    "pairs": 787,
+    "pairs": 788,
     "carries": {
-      "original_mean": 0.6556543837357052,
-      "variant_mean": 0.6797966963151207,
-      "standardised_difference": 0.026493840448598042,
-      "upper_95": 0.1253042626041913,
-      "n": 787,
+      "original_mean": 0.6624365482233503,
+      "variant_mean": 0.6852791878172588,
+      "standardised_difference": 0.025072312929715762,
+      "upper_95": 0.12381956584716328,
+      "n": 788,
       "balanced": false
     },
     "operand_digits": {
-      "original_mean": 12.846251588310038,
-      "variant_mean": 12.856416772554002,
-      "standardised_difference": 0.0013570935786852028,
-      "upper_95": 0.1001631925573895,
-      "n": 787,
+      "original_mean": 12.874365482233502,
+      "variant_mean": 12.887055837563452,
+      "standardised_difference": 0.001696863329379503,
+      "upper_95": 0.10044025458367996,
+      "n": 788,
       "balanced": false
     },
     "divisions": {
-      "original_mean": 0.5501905972045743,
-      "variant_mean": 0.5501905972045743,
+      "original_mean": 0.5456852791878173,
+      "variant_mean": 0.5456852791878173,
       "standardised_difference": 0.0,
-      "upper_95": 0.09880608760548831,
-      "n": 787,
+      "upper_95": 0.09874337348453614,
+      "n": 788,
       "balanced": true
     },
     "non_round": {
-      "original_mean": 4.332909783989835,
-      "variant_mean": 4.340533672172808,
-      "standardised_difference": 0.002800204217006159,
-      "upper_95": 0.10160634024452805,
-      "n": 787,
+      "original_mean": 4.33756345177665,
+      "variant_mean": 4.347715736040609,
+      "standardised_difference": 0.003725266880111827,
+      "upper_95": 0.10246872600975808,
+      "n": 788,
       "balanced": false
     },
     "steps": {
-      "original_mean": 3.271918678526048,
-      "variant_mean": 3.271918678526048,
+      "original_mean": 3.2753807106598987,
+      "variant_mean": 3.2753807106598987,
       "standardised_difference": 0.0,
-      "upper_95": 0.09880608760548831,
-      "n": 787,
+      "upper_95": 0.09874337348453614,
+      "n": 788,
       "balanced": true
     },
-    "worst_standardised_difference": 0.026493840448598042,
-    "worst_standardised_difference_upper_95": 0.1253042626041913,
-    "n": 787,
+    "worst_standardised_difference": 0.025072312929715762,
+    "worst_standardised_difference_upper_95": 0.12381956584716328,
+    "n": 788,
     "balanced": false,
     "point_estimates_balanced": true,
-    "verdict": "Point estimates show balance \u2014 the largest standardised difference is 0.026 \u2014 but at n=787 the 95% upper bound is 0.125, so imbalance at the 0.1 convention is not excluded. Certifying it would need about 1,421 pairs, which this dataset does not yield. The honest claim is that the arms look balanced and the sample cannot prove it."
+    "verdict": "Point estimates show balance \u2014 the largest standardised difference is 0.025 \u2014 but at n=788 the 95% upper bound is 0.124, so imbalance at the 0.1 convention is not excluded. Certifying it would need about 1,368 pairs, which this dataset does not yield. The honest claim is that the arms look balanced and the sample cannot prove it."
   }
 }

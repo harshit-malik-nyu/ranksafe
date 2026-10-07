@@ -137,7 +137,9 @@ It costs coverage: **787 pairs** rather than 1,029. The browser harness runs
 the balanced set by default, because it is the one whose drop means anything.
 
 `scripts/check_balance.py` regenerates both arms from the build seed and
-re-measures, so the control is verified rather than asserted.
+re-measures, so the control is verified rather than asserted. Run with
+`--seeds 5` it checks that balance is not an artefact of one draw: every
+matched seed lands under 0.040 and every unconstrained seed above 0.218.
 
 ### Order effects, removed rather than argued away
 

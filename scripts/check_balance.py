@@ -41,6 +41,9 @@ def arms(verified, matched: bool, seed: int):
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--seed", type=int, default=7)
+    ap.add_argument("--seeds", type=int, default=1,
+                    help="repeat across this many seeds; balance holding on "
+                         "one draw could be luck")
     ap.add_argument("--out", default=str(ROOT / "evidence" / "balance.json"))
     args = ap.parse_args()
 
@@ -51,6 +54,36 @@ def main() -> int:
     verified = [p for p in parsed if p.usable and verify_chain(p)]
 
     out = {}
+    seeds = [args.seed + i for i in range(args.seeds)]
+
+    if args.seeds > 1:
+        # Objection 6 in docs/against.md: the committed pairs come from one
+        # draw. Balance holding on that draw and nothing else would be luck,
+        # so it is checked across seeds before being relied on.
+        across = {}
+        for label, matched in (("unconstrained", False),
+                               ("magnitude_matched", True)):
+            points, pairs = [], []
+            for sd in seeds:
+                o, v = arms(verified, matched, sd)
+                b = balance(o, v)
+                points.append(b["worst_standardised_difference"])
+                pairs.append(len(o))
+            across[label] = {
+                "seeds": seeds,
+                "worst_point_estimates": points,
+                "max_across_seeds": max(points),
+                "pairs_per_seed": pairs,
+                "stable": max(points) < 0.05,
+            }
+            print(f"\n  {label} across {len(seeds)} seeds")
+            print(f"    worst smd per seed: "
+                  f"{[round(x, 3) for x in points]}")
+            print(f"    max {max(points):.3f} -> "
+                  f"{'STABLE' if max(points) < 0.05 else 'VARIES'}")
+            print(f"    pairs per seed: {pairs}")
+        out["across_seeds"] = across
+
     for label, matched in (("unconstrained", False),
                            ("magnitude_matched", True)):
         o, v = arms(verified, matched, args.seed)

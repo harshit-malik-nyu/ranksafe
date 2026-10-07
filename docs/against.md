@@ -76,12 +76,24 @@ quantities are dropped. A model's score on this subset is not its score on
 GSM8K, and a drop measured here may not transfer to the parts that were
 excluded.
 
-## 6. One seed, one draw
+## 6. One seed, one draw — now measured
 
-The committed pairs come from seed 7. A different seed produces different
-substitutions, and nothing here measures how much the result moves across
-seeds. Given that each problem admits many valid variants, seed variance is a
-real source of uncertainty that is currently unquantified.
+The committed pairs come from seed 7, and balance holding on that draw alone
+would be luck. Checked across five seeds:
+
+| | Worst standardised difference per seed | Max |
+|---|---|---:|
+| Matched | 0.022, 0.020, 0.031, 0.040, 0.010 | **0.040** |
+| Unconstrained | 0.237, 0.233, 0.237, 0.221, 0.218 | 0.237 |
+
+Every matched draw lands under 0.05; every unconstrained draw sits above 0.21.
+Pair counts vary by under 4%, so the draws are selecting comparable problem
+sets rather than different ones.
+
+**What remains unmeasured is downstream.** Balance is stable across seeds; how
+much a *model's measured drop* would move across seeds is not known, because
+no model has been run on more than one draw. That is the part of this
+objection the evidence does not yet reach.
 
 ## 7. GSM8K may be the wrong benchmark to care about
 

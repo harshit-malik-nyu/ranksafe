@@ -135,3 +135,50 @@ class TestTheCommittedBalance:
         assert measured["magnitude_matched"]["pairs"] < \
                measured["unconstrained"]["pairs"]
         assert measured["magnitude_matched"]["pairs"] > 500
+
+
+class TestBalanceIsNotLuck:
+    """
+    The committed pairs come from one seed. Balance holding on that draw and
+    nothing else would be luck, so it is checked across seeds before being
+    relied on.
+    """
+
+    @pytest.fixture(scope="class")
+    def across(self):
+        p = ROOT / "evidence" / "balance.json"
+        if not p.exists():
+            pytest.skip("balance not measured")
+        d = json.loads(p.read_text())
+        if "across_seeds" not in d:
+            pytest.skip("single-seed run")
+        return d["across_seeds"]
+
+    def test_the_matched_set_balances_on_every_seed(self, across):
+        m = across["magnitude_matched"]
+        assert m["stable"]
+        assert max(m["worst_point_estimates"]) < 0.05
+        assert len(m["seeds"]) >= 5
+
+    def test_the_unconstrained_set_fails_on_every_seed(self, across):
+        """
+        Consistency on both sides is the point. An imbalance that appeared on
+        one draw would be noise; one that appears on all of them is the
+        confound the control exists to remove.
+        """
+        u = across["unconstrained"]
+        assert min(u["worst_point_estimates"]) > 0.15
+
+    def test_the_gap_between_them_holds_on_every_seed(self, across):
+        m = across["magnitude_matched"]["worst_point_estimates"]
+        u = across["unconstrained"]["worst_point_estimates"]
+        for a, b in zip(m, u):
+            assert b > 4 * a, f"matched {a}, unconstrained {b}"
+
+    def test_pair_counts_are_stable_across_seeds(self, across):
+        """
+        A draw that yielded far fewer pairs would be selecting different
+        problems, and the balance figure would not be comparable.
+        """
+        p = across["magnitude_matched"]["pairs_per_seed"]
+        assert max(p) - min(p) < 0.1 * min(p)
