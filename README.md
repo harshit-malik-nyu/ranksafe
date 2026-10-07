@@ -223,6 +223,60 @@ python scripts/build_benchmark.py --seed 7
 Deterministic given the seed, so the committed pairs can be regenerated rather
 than trusted.
 
+## The cross-lab question, answered from published data
+
+The limitation above — tiers of one family, not a leaderboard — is the
+objection this repository cannot fix with its own tooling. **That arrangement
+already exists in published data.**
+
+Scale AI's GSM1k paper evaluated **63 models from more than twenty families**
+on GSM8k and on a held-out replica built to match its difficulty, under one
+standardised prompt. They report per-model *drops*. Nobody asked whether the
+*ordering* moved — which is a different question and the one a procurement
+decision reads.
+
+### The table is broadly stable
+
+| Margin | Pairs | Reversals | Rate |
+|---:|---:|---:|---:|
+| 0.0pp | 1,953 | 45 | 2.3% |
+| 2.0pp | 1,860 | 16 | 0.9% |
+| 3.0pp | 1,813 | 9 | 0.5% |
+| **5.0pp** | 1,723 | **1** | **0.1%** |
+
+Counting every inversion overstates instability — two models a third of a
+point apart on 1,319 problems were never ordered. The rate collapses as the
+margin rises, which is the signature of noise rather than reordering. **Only
+one ordering separated by five points or more reverses.**
+
+### But the reversals are not random
+
+If reversals were measurement noise, the model that *falls* would be drawn at
+the base rate of overfit-family models in the sample — **47.6%**. It is not:
+
+| Margin | Fallers from overfit families | Base rate | p |
+|---:|---:|---:|---:|
+| 2.0pp | 12 / 16 — **75%** | 47.6% | 0.025 |
+| 3.0pp | 8 / 9 — **89%** | 47.6% | 0.014 |
+
+The single reversal surviving a five-point margin is
+`Phi-3-medium-128k-instruct` losing a **7.2-point lead** to
+`gemini-1.5-flash`, ending 1.0 behind — an 8.2-point swing between a family
+the authors call systematically overfit and one they call flat.
+
+Family labels come from the authors' prose, not from the accuracies, so the
+grouping is not defined by the data it is then tested on.
+
+**The finding is therefore specific rather than alarming.** A leaderboard
+does not dissolve under a held-out replica. It reorders rarely — and when it
+does, it reorders in the direction contamination predicts, between exactly
+the pairs where one side is suspected of having seen the benchmark.
+
+*Accuracies from Zhang et al., NeurIPS 2024 Datasets and Benchmarks Track,
+arXiv:2405.00332, Appendix F. They come from one standardised prompt rather
+than each model's best, so they do not match published benchmark figures; what
+that affects is the level, not whether an ordering survives.*
+
 ## The case against
 
 [`docs/against.md`](docs/against.md) lists seven objections, leading with the

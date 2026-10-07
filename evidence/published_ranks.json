@@ -1,0 +1,85 @@
+{
+  "models": 63,
+  "typical_standard_error": 0.019925019651149133,
+  "raw": {
+    "pairs_considered": 1953,
+    "flips": 45,
+    "flip_rate": 0.02304147465437788
+  },
+  "beyond_two_se": {
+    "margin": 0.03985003930229827,
+    "pairs_considered": 1763,
+    "flips": 4,
+    "flip_rate": 0.0022688598979013048
+  },
+  "flips_over_five_points": 1,
+  "largest": [
+    {
+      "a": "Phi-3-medium-128k-instruct",
+      "b": "gemini-1.5-flash-preview-0514",
+      "margin_original": 0.07199999999999995,
+      "margin_replica": -0.010000000000000009,
+      "size": 0.07199999999999995
+    },
+    {
+      "a": "CodeLlama-13b-hf",
+      "b": "deepseek-math-7b-rl",
+      "margin_original": 0.04899999999999999,
+      "margin_replica": -0.0020000000000000018,
+      "size": 0.04899999999999999
+    },
+    {
+      "a": "Yi-6B-Chat",
+      "b": "Mistral-7B-v0.1",
+      "margin_original": 0.045999999999999985,
+      "margin_replica": -0.007000000000000006,
+      "size": 0.045999999999999985
+    },
+    {
+      "a": "math-shepherd-mistral-7b-rl",
+      "b": "claude-3-haiku-20240307",
+      "margin_original": 0.040999999999999925,
+      "margin_replica": -0.02200000000000002,
+      "size": 0.040999999999999925
+    }
+  ],
+  "sweep": [
+    {
+      "margin": 0.0,
+      "pairs_considered": 1953,
+      "flips": 45,
+      "flip_rate": 0.02304147465437788
+    },
+    {
+      "margin": 0.01,
+      "pairs_considered": 1908,
+      "flips": 30,
+      "flip_rate": 0.015723270440251572
+    },
+    {
+      "margin": 0.015,
+      "pairs_considered": 1881,
+      "flips": 22,
+      "flip_rate": 0.011695906432748537
+    },
+    {
+      "margin": 0.02,
+      "pairs_considered": 1860,
+      "flips": 16,
+      "flip_rate": 0.008602150537634409
+    },
+    {
+      "margin": 0.03,
+      "pairs_considered": 1813,
+      "flips": 9,
+      "flip_rate": 0.004964147821290678
+    },
+    {
+      "margin": 0.05,
+      "pairs_considered": 1723,
+      "flips": 1,
+      "flip_rate": 0.0005803830528148578
+    }
+  ],
+  "verdict": "4 of 1763 orderings separated by more than two standard errors (4.0 points) reversed on the held-out replica, including 1 where the original gap exceeded five points. A table that reorders on a same-difficulty replica is not a basis for choosing between the models that swapped."
+}

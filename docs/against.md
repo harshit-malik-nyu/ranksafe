@@ -5,7 +5,23 @@ leaderboard.
 
 ---
 
-## 1. It cannot test a leaderboard
+## 1. It cannot test a leaderboard — so published data was used instead
+
+**Status: partly answered.** `src/ranksafe/published.py` computes rank
+stability over 63 models from more than twenty families, using accuracies from
+the GSM1k paper. The table is broadly stable — one reversal in 1,723 orderings
+separated by five points or more — and the reversals that do occur concentrate
+significantly in the families those authors independently identify as overfit
+(8 of 9 at a 3-point margin, p = 0.014, against a 47.6% base rate).
+
+What remains unanswered is whether **this repository's own perturbation**
+reproduces that, because running it across labs still needs API access the
+project does not have. The published analysis establishes that the question
+has a non-trivial answer; it does not validate the instrument built here
+against it.
+
+The original objection, unchanged:
+
 
 The harness runs model *tiers* — quick, default, complex — from one family
 behind one sampling interface. That is not a leaderboard. A leaderboard
