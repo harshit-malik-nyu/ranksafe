@@ -14,7 +14,7 @@ from pathlib import Path
 import pytest
 
 from ranksafe.published import (
-    inversions, is_overfit_family, load, margin_sweep, summarise,
+    inversions, is_overfit_family, load, margin_sweep,
     typical_standard_error, who_falls,
 )
 
@@ -93,8 +93,6 @@ class TestWhoFalls:
         Defining the groups from the accuracies and then testing the groups on
         the same accuracies would be circular.
         """
-        import inspect
-
         from ranksafe import published
         doc = " ".join(inspect.getdoc(published.who_falls).split())
         assert "not defined by the data it is then tested on" in doc

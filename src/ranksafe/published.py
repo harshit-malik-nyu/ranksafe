@@ -135,8 +135,7 @@ def margin_sweep(data: dict,
 
 def typical_standard_error(data: dict) -> float:
     """SE of a difference for two mid-range models, as a reference margin."""
-
-    return standard_error(0.5, n1, 0.5, n2)
+    return standard_error(0.5, data["n_gsm8k"], 0.5, data["n_gsm1k"])
 
 
 def summarise(data: dict) -> dict:

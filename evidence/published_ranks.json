@@ -1,6 +1,53 @@
 {
   "models": 63,
   "typical_standard_error": 0.019925019651149133,
+  "who_falls_2pp": {
+    "margin": 0.02,
+    "reversals": 16,
+    "fallers_from_overfit_families": 12,
+    "share": 0.75,
+    "base_rate": 0.47619047619047616,
+    "p_value": 0.024981827327672568,
+    "significant": true,
+    "fallers": [
+      "Phi-3-medium-128k-instruct",
+      "CodeLlama-13b-hf",
+      "Yi-6B-Chat",
+      "math-shepherd-mistral-7b-rl",
+      "CodeLlama-13b-Python-hf",
+      "math-shepherd-mistral-7b-rl",
+      "math-shepherd-mistral-7b-rl",
+      "math-shepherd-mistral-7b-rl",
+      "Meta-Llama-3-8B-Instruct",
+      "math-shepherd-mistral-7b-rl",
+      "Phi-3-mini-4k-instruct",
+      "Meta-Llama-3-8B",
+      "math-shepherd-mistral-7b-rl",
+      "Meta-Llama-3-8B-Instruct",
+      "Meta-Llama-3-8B-Instruct",
+      "Xwin-Math-70B-V1.0"
+    ]
+  },
+  "who_falls_3pp": {
+    "margin": 0.03,
+    "reversals": 9,
+    "fallers_from_overfit_families": 8,
+    "share": 0.8888888888888888,
+    "base_rate": 0.47619047619047616,
+    "p_value": 0.013723119505417946,
+    "significant": true,
+    "fallers": [
+      "Phi-3-medium-128k-instruct",
+      "CodeLlama-13b-hf",
+      "Yi-6B-Chat",
+      "math-shepherd-mistral-7b-rl",
+      "CodeLlama-13b-Python-hf",
+      "math-shepherd-mistral-7b-rl",
+      "math-shepherd-mistral-7b-rl",
+      "math-shepherd-mistral-7b-rl",
+      "Meta-Llama-3-8B-Instruct"
+    ]
+  },
   "raw": {
     "pairs_considered": 1953,
     "flips": 45,
