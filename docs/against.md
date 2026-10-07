@@ -10,9 +10,11 @@ leaderboard.
 **Status: partly answered.** `src/ranksafe/published.py` computes rank
 stability over 63 models from more than twenty families, using accuracies from
 the GSM1k paper. The table is broadly stable — one reversal in 1,723 orderings
-separated by five points or more — and the reversals that do occur concentrate
-significantly in the families those authors independently identify as overfit
-(8 of 9 at a 3-point margin, p = 0.014, against a 47.6% base rate).
+separated by five points or more — and the reversals that do occur lean toward the
+families those authors independently identify as overfit — though **not
+significantly** once counted properly. Over pairs it reads 8 of 9 at a
+3-point margin, p = 0.014; over distinct models it is 5 of 6, p = 0.089,
+because one model falling behind six others is one observation and not six.
 
 What remains unanswered is whether **this repository's own perturbation**
 reproduces that, because running it across labs still needs API access the
@@ -111,7 +113,19 @@ much a *model's measured drop* would move across seeds is not known, because
 no model has been run on more than one draw. That is the part of this
 objection the evidence does not yet reach.
 
-## 7. GSM8K may be the wrong benchmark to care about
+## 7. The cross-lab analysis rests on six models
+
+The direction — overfit families over-represented among the models that fall —
+is computed on **6 distinct fallers at a three-point margin and 9 at two
+points**. That is a small sample for a claim about ecosystem-wide behaviour,
+and the p-values say so: 0.089 and 0.069.
+
+Widening the margin shrinks it further; narrowing it admits pairs that were
+never ordered. There is no threshold at which this becomes a large sample,
+because the underlying event — a meaningful reordering — is rare, which is
+itself the main finding.
+
+## 8. GSM8K may be the wrong benchmark to care about
 
 It is a solved benchmark by frontier standards. Rank instability on a
 benchmark nobody uses for procurement is a methodological demonstration rather

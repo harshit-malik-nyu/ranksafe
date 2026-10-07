@@ -249,28 +249,39 @@ point apart on 1,319 problems were never ordered. The rate collapses as the
 margin rises, which is the signature of noise rather than reordering. **Only
 one ordering separated by five points or more reverses.**
 
-### But the reversals are not random
+### Do the reversals concentrate where contamination is? Suggestive, not shown.
 
-If reversals were measurement noise, the model that *falls* would be drawn at
-the base rate of overfit-family models in the sample — **47.6%**. It is not:
+If reversals were noise, the model that *falls* would be drawn at the base
+rate of overfit-family models — **47.6%**. It runs higher than that, and the
+first version of this analysis called it significant. **It is not, and the
+reason is worth more than the result.**
 
-| Margin | Fallers from overfit families | Base rate | p |
-|---:|---:|---:|---:|
-| 2.0pp | 12 / 16 — **75%** | 47.6% | 0.025 |
-| 3.0pp | 8 / 9 — **89%** | 47.6% | 0.014 |
+A binomial tail over reversals assumes each is an independent draw. They are
+not. One model falling behind six others produces **six reversals and one
+observation** — `math-shepherd-mistral-7b-rl` alone accounts for four of the
+nine reversals beyond a three-point margin.
+
+| Margin | Counted over pairs | Counted over distinct models |
+|---:|---|---|
+| 2.0pp | 12 / 16 — p = **0.025** | 7 / 9 — p = **0.069** |
+| 3.0pp | 8 / 9 — p = **0.014** | 5 / 6 — p = **0.089** |
+
+**Same direction, no longer significant.** Both columns are kept in the
+output: the pairwise figure is what the analysis looked like before the
+correction, and hiding it would make the correction unauditable.
 
 The single reversal surviving a five-point margin is
 `Phi-3-medium-128k-instruct` losing a **7.2-point lead** to
-`gemini-1.5-flash`, ending 1.0 behind — an 8.2-point swing between a family
-the authors call systematically overfit and one they call flat.
+`gemini-1.5-flash`, ending 1.0 behind. One case is an anecdote, and it is
+reported as one.
 
 Family labels come from the authors' prose, not from the accuracies, so the
 grouping is not defined by the data it is then tested on.
 
-**The finding is therefore specific rather than alarming.** A leaderboard
-does not dissolve under a held-out replica. It reorders rarely — and when it
-does, it reorders in the direction contamination predicts, between exactly
-the pairs where one side is suspected of having seen the benchmark.
+**What the analysis supports:** a leaderboard does not dissolve under a
+held-out replica — one reordering in 1,723 pairs separated by five points or
+more. Whether the reorderings that do occur concentrate in contaminated
+families points the right way and rests on six models.
 
 *Accuracies from Zhang et al., NeurIPS 2024 Datasets and Benchmarks Track,
 arXiv:2405.00332, Appendix F. They come from one standardised prompt rather

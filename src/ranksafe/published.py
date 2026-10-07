@@ -187,25 +187,55 @@ def who_falls(data: dict, margin: float = 0.02) -> dict:
     eyeballed, and the family labels come from the authors' prose rather than
     from the accuracies, so the grouping is not defined by the data it is
     then tested on.
+
+    COUNTED OVER DISTINCT MODELS, NOT PAIRS
+    ---------------------------------------
+    A binomial tail over reversals assumes each is an independent draw. They
+    are not. One model that falls behind six others produces six reversals
+    and one observation: math-shepherd-mistral-7b-rl accounts for four of the
+    nine reversals beyond a three-point margin.
+
+    Counting pairs gave p = 0.014 at that margin. Counting distinct fallers
+    gives **p = 0.089** on 5 of 6 — the same direction, no longer significant.
+    Both are returned, because the pairwise figure is the one that looks like
+    a result and the distinct figure is the one that is.
     """
     import math
 
     r = inversions(data, margin)
     fallers = [(f["a"] if f["margin_original"] > 0 else f["b"])
                for f in r["all_flips"]]
-    n = len(fallers)
-    k = sum(1 for f in fallers if is_overfit_family(f))
     base = (sum(1 for m in data["models"] if is_overfit_family(m["model"]))
             / len(data["models"]))
-    p = (sum(math.comb(n, i) * base ** i * (1 - base) ** (n - i)
-             for i in range(k, n + 1)) if n else 1.0)
 
-    return {"margin": margin, "reversals": n,
-            "fallers_from_overfit_families": k,
-            "share": k / n if n else 0.0,
-            "base_rate": base, "p_value": p,
-            "significant": p < 0.05,
-            "fallers": fallers}
+    def tail(k: int, n: int) -> float:
+        if not n:
+            return 1.0
+        return sum(math.comb(n, i) * base ** i * (1 - base) ** (n - i)
+                   for i in range(k, n + 1))
+
+    n_pairs = len(fallers)
+    k_pairs = sum(1 for f in fallers if is_overfit_family(f))
+
+    distinct = sorted(set(fallers))
+    n_models = len(distinct)
+    k_models = sum(1 for f in distinct if is_overfit_family(f))
+    p_models = tail(k_models, n_models)
+
+    return {"margin": margin,
+            "reversals": n_pairs,
+            "distinct_fallers": n_models,
+            "fallers_from_overfit_families": k_models,
+            "share": k_models / n_models if n_models else 0.0,
+            "base_rate": base,
+            "p_value": p_models,
+            "significant": p_models < 0.05,
+            # Kept visible so the inflation is auditable rather than hidden.
+            "pairwise_k_n": [k_pairs, n_pairs],
+            "pairwise_p_value": tail(k_pairs, n_pairs),
+            "most_frequent_faller": max(
+                set(fallers), key=fallers.count) if fallers else None,
+            "fallers": distinct}
 
 
 def _verdict(raw: dict, meaningful: dict, big: list, se: float) -> str:
@@ -218,5 +248,8 @@ def _verdict(raw: dict, meaningful: dict, big: list, se: float) -> str:
             f"orderings separated by more than two standard errors "
             f"({2*se*100:.1f} points) reversed on the held-out replica, "
             f"including {len(big)} where the original gap exceeded five "
-            "points. A table that reorders on a same-difficulty replica is "
-            "not a basis for choosing between the models that swapped.")
+            "points. The table is broadly stable. Whether the reversals "
+            "concentrate in the families the authors call overfit is "
+            "suggestive and not established: counted over distinct models "
+            "rather than pairs, the sample is too small to separate from "
+            "chance.")

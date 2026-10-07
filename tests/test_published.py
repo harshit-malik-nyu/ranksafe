@@ -78,16 +78,44 @@ class TestRankStability:
 
 class TestWhoFalls:
 
-    def test_overfit_families_are_over_represented_among_fallers(self, data):
+    def test_the_direction_is_there(self, data):
         """
-        THE FINDING. If reversals were noise, the falling model would be drawn
-        at the base rate of overfit-family models. It is not: at a 3-point
-        margin, 8 of 9 fallers come from families the authors independently
-        identify as systematically overfit, against a 48% base rate.
+        Overfit families are over-represented among the models that fall —
+        83% against a 48% base rate at a three-point margin.
         """
         w = who_falls(data, 0.03)
         assert w["share"] > w["base_rate"] * 1.5
-        assert w["significant"], f"p = {w['p_value']}"
+
+    def test_but_it_is_not_significant_once_counted_properly(self, data):
+        """
+        THE CORRECTION, and it retracts a headline.
+
+        A binomial tail over reversals assumes each is an independent draw.
+        One model falling behind six others produces six reversals and one
+        observation: math-shepherd-mistral-7b-rl accounts for four of the
+        nine reversals beyond a three-point margin.
+
+        Counting pairs gave p = 0.014. Counting distinct fallers gives
+        p = 0.089 on 5 of 6 — same direction, no longer significant.
+        """
+        w = who_falls(data, 0.03)
+        assert not w["significant"]
+        assert w["p_value"] > 0.05
+        assert w["distinct_fallers"] < w["reversals"]
+
+    def test_the_inflated_figure_stays_visible(self, data):
+        """
+        Both numbers are returned. The pairwise one is what the analysis
+        looked like before the correction, and hiding it would make the
+        correction unauditable.
+        """
+        w = who_falls(data, 0.03)
+        assert w["pairwise_p_value"] < 0.05 < w["p_value"]
+        assert w["most_frequent_faller"]
+
+    def test_one_model_drives_the_pairwise_count(self, data):
+        w = who_falls(data, 0.02)
+        assert "math-shepherd" in w["most_frequent_faller"]
 
     def test_the_family_labels_come_from_the_authors_not_the_numbers(self):
         """

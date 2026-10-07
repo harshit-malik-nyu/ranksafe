@@ -4,48 +4,52 @@
   "who_falls_2pp": {
     "margin": 0.02,
     "reversals": 16,
-    "fallers_from_overfit_families": 12,
-    "share": 0.75,
+    "distinct_fallers": 9,
+    "fallers_from_overfit_families": 7,
+    "share": 0.7777777777777778,
     "base_rate": 0.47619047619047616,
-    "p_value": 0.024981827327672568,
-    "significant": true,
+    "p_value": 0.06856523745551021,
+    "significant": false,
+    "pairwise_k_n": [
+      12,
+      16
+    ],
+    "pairwise_p_value": 0.024981827327672568,
+    "most_frequent_faller": "math-shepherd-mistral-7b-rl",
     "fallers": [
-      "Phi-3-medium-128k-instruct",
-      "CodeLlama-13b-hf",
-      "Yi-6B-Chat",
-      "math-shepherd-mistral-7b-rl",
       "CodeLlama-13b-Python-hf",
-      "math-shepherd-mistral-7b-rl",
-      "math-shepherd-mistral-7b-rl",
-      "math-shepherd-mistral-7b-rl",
-      "Meta-Llama-3-8B-Instruct",
-      "math-shepherd-mistral-7b-rl",
-      "Phi-3-mini-4k-instruct",
+      "CodeLlama-13b-hf",
       "Meta-Llama-3-8B",
-      "math-shepherd-mistral-7b-rl",
       "Meta-Llama-3-8B-Instruct",
-      "Meta-Llama-3-8B-Instruct",
-      "Xwin-Math-70B-V1.0"
+      "Phi-3-medium-128k-instruct",
+      "Phi-3-mini-4k-instruct",
+      "Xwin-Math-70B-V1.0",
+      "Yi-6B-Chat",
+      "math-shepherd-mistral-7b-rl"
     ]
   },
   "who_falls_3pp": {
     "margin": 0.03,
     "reversals": 9,
-    "fallers_from_overfit_families": 8,
-    "share": 0.8888888888888888,
+    "distinct_fallers": 6,
+    "fallers_from_overfit_families": 5,
+    "share": 0.8333333333333334,
     "base_rate": 0.47619047619047616,
-    "p_value": 0.013723119505417946,
-    "significant": true,
+    "p_value": 0.0886130783505995,
+    "significant": false,
+    "pairwise_k_n": [
+      8,
+      9
+    ],
+    "pairwise_p_value": 0.013723119505417946,
+    "most_frequent_faller": "math-shepherd-mistral-7b-rl",
     "fallers": [
-      "Phi-3-medium-128k-instruct",
-      "CodeLlama-13b-hf",
-      "Yi-6B-Chat",
-      "math-shepherd-mistral-7b-rl",
       "CodeLlama-13b-Python-hf",
-      "math-shepherd-mistral-7b-rl",
-      "math-shepherd-mistral-7b-rl",
-      "math-shepherd-mistral-7b-rl",
-      "Meta-Llama-3-8B-Instruct"
+      "CodeLlama-13b-hf",
+      "Meta-Llama-3-8B-Instruct",
+      "Phi-3-medium-128k-instruct",
+      "Yi-6B-Chat",
+      "math-shepherd-mistral-7b-rl"
     ]
   },
   "raw": {
@@ -128,5 +132,5 @@
       "flip_rate": 0.0005803830528148578
     }
   ],
-  "verdict": "4 of 1763 orderings separated by more than two standard errors (4.0 points) reversed on the held-out replica, including 1 where the original gap exceeded five points. A table that reorders on a same-difficulty replica is not a basis for choosing between the models that swapped."
+  "verdict": "4 of 1763 orderings separated by more than two standard errors (4.0 points) reversed on the held-out replica, including 1 where the original gap exceeded five points. The table is broadly stable. Whether the reversals concentrate in the families the authors call overfit is suggestive and not established: counted over distinct models rather than pairs, the sample is too small to separate from chance."
 }
