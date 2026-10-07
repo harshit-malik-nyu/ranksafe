@@ -1,4 +1,4 @@
-# Does the leaderboard survive changing the numbers?
+# Does a ranking survive changing the numbers?
 
 Companies pick models from leaderboards. Procurement, architecture, "which
 model do we standardise on" — all trace back to a benchmark table.
@@ -12,6 +12,15 @@ through chain-of-thought.
 **The decision-grade question is different. Does the *ranking* hold?** If
 changing the numbers in the questions reorders the table, the figure driving
 the purchase is noise, and whose training set caused it stops mattering.
+
+**What this repository can and cannot test.** It builds the instrument and
+runs it across model *tiers* from one family. That is not a leaderboard —
+a leaderboard compares labs with different training corpora and different
+contamination exposure, and that difference is the whole mechanism in
+question. Tiers of one family likely share training data, so the arrangement
+most likely to show instability is the one this cannot construct. The method
+is the contribution; a leaderboard result would need API access across
+several labs.
 
 ---
 
@@ -211,6 +220,17 @@ python scripts/build_benchmark.py --seed 7
 
 Deterministic given the seed, so the committed pairs can be regenerated rather
 than trusted.
+
+## The case against
+
+[`docs/against.md`](docs/against.md) lists seven objections, leading with the
+one that cannot be answered from here: this measures tiers of one model family
+and calls it rank stability.
+
+Also recorded: a drop still is not memorisation, the balance control is
+verified on a four-number proxy for arithmetic difficulty, the 787 perturbable
+problems are not a random sample of the 1,319, and the committed pairs come
+from a single seed whose variance is unmeasured.
 
 ## License
 
