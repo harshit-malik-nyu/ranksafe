@@ -115,11 +115,28 @@ and **cannot see the second at any feasible size** — 1pp would need roughly
 could not have detected one below its floor, rather than reporting that the
 ranking held. Those are different claims and only the first is available here.
 
+## Running it
+
+**[Run it here](https://claude.ai/artifact/N1AX7QhhzJspFTqZ9rKhU8)** — no key,
+no setup. Pick a sample size and the page tells you what that size can detect
+*before* you spend the time, then runs two or three model tiers across both
+arms.
+
+`scripts/evaluate.py` does the same thing from the command line and raises
+without an API key rather than fabricating output.
+
+The extractor exists twice, in Python and in the page. That is a liability —
+two implementations of the same rule can diverge and produce different numbers
+under the same name — so they were checked against each other on every case
+that might separate them, including the greedy-parser trap. **Zero
+mismatches**, and `tests/test_parity.py` asserts the page still carries the
+same rules.
+
 ## Status
 
-The paired benchmark is built and committed. What is **not** done: running
-models on it. That comes next, and the result — whether ranks hold or flip —
-is the point of the exercise.
+The benchmark is built, the harness runs, and **no result is committed yet**.
+That is the next thing, and the honest version of it will say what the run
+could not have seen as prominently as what it did.
 
 ## Reproducing
 
