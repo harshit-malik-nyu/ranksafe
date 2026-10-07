@@ -81,6 +81,46 @@ def standard_error(p1: float, n1: int, p2: float, n2: int) -> float:
     return math.sqrt(p1 * (1 - p1) / n1 + p2 * (1 - p2) / n2)
 
 
+def reversal_significance(data: dict, a: str, b: str) -> dict:
+    """
+    Is a specific reversal distinguishable from zero?
+
+    A reversal is a difference of differences — model A's lead on the
+    original minus its lead on the replica — so it needs the standard error
+    of that quantity, not of either accuracy.
+
+    Worth computing because the five-point reversal is quoted as the headline
+    case, and quoting a swing without testing it is the same error as
+    reporting a drop without testing it.
+    """
+    m = {x["model"]: x for x in data["models"]}
+    if a not in m or b not in m:
+        return {"found": False}
+    n1, n2 = data["n_gsm8k"], data["n_gsm1k"]
+    A, B = m[a], m[b]
+
+    before = A["gsm8k"] - B["gsm8k"]
+    after = A["gsm1k"] - B["gsm1k"]
+    did = before - after
+
+    var = (A["gsm8k"] * (1 - A["gsm8k"]) / n1
+           + B["gsm8k"] * (1 - B["gsm8k"]) / n1
+           + A["gsm1k"] * (1 - A["gsm1k"]) / n2
+           + B["gsm1k"] * (1 - B["gsm1k"]) / n2)
+    se = var ** 0.5
+    z = did / se if se else 0.0
+    p = 2 * (1 - _normal_cdf(abs(z)))
+
+    return {"found": True, "a": a, "b": b,
+            "margin_original": before, "margin_replica": after,
+            "swing": did, "standard_error": se, "z": z, "p_value": p,
+            "significant": p < 0.05}
+
+
+def _normal_cdf(z: float) -> float:
+    return 0.5 * (1 + math.erf(z / math.sqrt(2)))
+
+
 def inversions(data: dict, margin: float = 0.0) -> dict:
     """
     How many orderings reverse between the original and the replica?
@@ -113,6 +153,60 @@ def inversions(data: dict, margin: float = 0.0) -> dict:
         "largest_flips": [f.as_dict() for f in flips[:10]],
         "all_flips": [f.as_dict() for f in flips],
     }
+
+
+def test_all_reversals(data: dict, margin: float = 0.03) -> dict:
+    """
+    Every reversal tested, with a correction for testing every reversal.
+
+    Nine tests at alpha 0.05 expect roughly half a false positive by chance,
+    so a count of "how many were significant" is not interpretable without
+    saying how many were tried. Holm-Bonferroni controls the family-wise
+    error rate and is used rather than Bonferroni because it is uniformly
+    more powerful at the same guarantee.
+
+    Reported both ways. The uncorrected count is what the individual tests
+    say; the corrected count is what survives having asked nine questions.
+    """
+    r = inversions(data, margin)
+    tests = [reversal_significance(data, f["a"], f["b"])
+             for f in r["all_flips"]]
+    tests = [t for t in tests if t.get("found")]
+    n = len(tests)
+
+    # Holm-Bonferroni: sort ascending, compare the i-th to alpha/(n-i).
+    order = sorted(range(n), key=lambda i: tests[i]["p_value"])
+    survives = [False] * n
+    for rank, idx in enumerate(order):
+        if tests[idx]["p_value"] <= 0.05 / (n - rank):
+            survives[idx] = True
+        else:
+            break
+    for i, t in enumerate(tests):
+        t["survives_holm"] = survives[i]
+
+    return {
+        "margin": margin, "tests": n,
+        "significant_uncorrected": sum(1 for t in tests if t["significant"]),
+        "significant_holm": sum(survives),
+        "expected_false_positives_uncorrected": 0.05 * n,
+        "results": tests,
+        "verdict": _reversal_verdict(n, sum(1 for t in tests if t["significant"]),
+                                     sum(survives)),
+    }
+
+
+def _reversal_verdict(n: int, raw: int, holm: int) -> str:
+    if holm == 0:
+        return (f"None of the {n} reversals survives correction for having "
+                "tested all of them. The orderings moved; none of the "
+                "individual moves can be distinguished from chance once the "
+                "search is accounted for.")
+    return (f"{holm} of {n} reversals survive Holm-Bonferroni correction "
+            f"({raw} were significant before correcting for having tested "
+            f"{n}). These are real swings, not noise — though whether they "
+            "concentrate in contaminated families is a separate question "
+            "this sample cannot settle.")
 
 
 def margin_sweep(data: dict,
@@ -151,6 +245,7 @@ def summarise(data: dict) -> dict:
         "typical_standard_error": se,
         "who_falls_2pp": who_falls(data, 0.02),
         "who_falls_3pp": who_falls(data, 0.03),
+        "reversal_tests_3pp": test_all_reversals(data, 0.03),
         "raw": {k: raw[k] for k in ("pairs_considered", "flips", "flip_rate")},
         "beyond_two_se": {k: meaningful[k] for k in
                           ("margin", "pairs_considered", "flips", "flip_rate")},

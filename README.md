@@ -270,10 +270,29 @@ nine reversals beyond a three-point margin.
 output: the pairwise figure is what the analysis looked like before the
 correction, and hiding it would make the correction unauditable.
 
-The single reversal surviving a five-point margin is
-`Phi-3-medium-128k-instruct` losing a **7.2-point lead** to
-`gemini-1.5-flash`, ending 1.0 behind. One case is an anecdote, and it is
-reported as one.
+### The reversals themselves are real
+
+A different question from whether they cluster: is each individual swing
+distinguishable from zero? A reversal is a difference of differences, so it
+needs the standard error of *that*, not of either accuracy.
+
+Of the nine reversals beyond a three-point margin, **seven are significant
+individually — and five survive Holm-Bonferroni correction** for having
+tested all nine. Nine tests at α = 0.05 expect 0.45 false positives; five
+survivors is well beyond that.
+
+The largest is `Phi-3-medium-128k-instruct` losing a **7.2-point lead** to
+`gemini-1.5-flash` and finishing 1.0 behind — an **8.2-point swing, z = 3.90,
+p = 0.0001.**
+
+So the two claims come apart cleanly:
+
+| | |
+|---|---|
+| **The reversals are real swings** | established — 5 survive correction |
+| **They concentrate in contaminated families** | suggestive — 5 of 6 distinct models, p = 0.089 |
+
+Collapsing those two is exactly how the retracted version went wrong.
 
 Family labels come from the authors' prose, not from the accuracies, so the
 grouping is not defined by the data it is then tested on.

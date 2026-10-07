@@ -52,6 +52,133 @@
       "math-shepherd-mistral-7b-rl"
     ]
   },
+  "reversal_tests_3pp": {
+    "margin": 0.03,
+    "tests": 9,
+    "significant_uncorrected": 7,
+    "significant_holm": 5,
+    "expected_false_positives_uncorrected": 0.45,
+    "results": [
+      {
+        "found": true,
+        "a": "Phi-3-medium-128k-instruct",
+        "b": "gemini-1.5-flash-preview-0514",
+        "margin_original": 0.07199999999999995,
+        "margin_replica": -0.010000000000000009,
+        "swing": 0.08199999999999996,
+        "standard_error": 0.021050375137719006,
+        "z": 3.8954175145823737,
+        "p_value": 9.802971977501684e-05,
+        "significant": true,
+        "survives_holm": true
+      },
+      {
+        "found": true,
+        "a": "CodeLlama-13b-hf",
+        "b": "deepseek-math-7b-rl",
+        "margin_original": 0.04899999999999999,
+        "margin_replica": -0.0020000000000000018,
+        "swing": 0.05099999999999999,
+        "standard_error": 0.02308737832585123,
+        "z": 2.208999189089159,
+        "p_value": 0.027174697308033124,
+        "significant": true,
+        "survives_holm": false
+      },
+      {
+        "found": true,
+        "a": "Yi-6B-Chat",
+        "b": "Mistral-7B-v0.1",
+        "margin_original": 0.045999999999999985,
+        "margin_replica": -0.007000000000000006,
+        "swing": 0.05299999999999999,
+        "standard_error": 0.027380223425314983,
+        "z": 1.9357037076256172,
+        "p_value": 0.05290400011239571,
+        "significant": false,
+        "survives_holm": false
+      },
+      {
+        "found": true,
+        "a": "math-shepherd-mistral-7b-rl",
+        "b": "claude-3-haiku-20240307",
+        "margin_original": 0.040999999999999925,
+        "margin_replica": -0.02200000000000002,
+        "swing": 0.06299999999999994,
+        "standard_error": 0.02313227324002644,
+        "z": 2.723467743368569,
+        "p_value": 0.0064600523713043145,
+        "significant": true,
+        "survives_holm": true
+      },
+      {
+        "found": true,
+        "a": "CodeLlama-13b-Python-hf",
+        "b": "deepseek-math-7b-rl",
+        "margin_original": 0.036000000000000004,
+        "margin_replica": -0.038000000000000006,
+        "swing": 0.07400000000000001,
+        "standard_error": 0.022574109149550554,
+        "z": 3.2780917071747804,
+        "p_value": 0.0010451143549961017,
+        "significant": true,
+        "survives_holm": true
+      },
+      {
+        "found": true,
+        "a": "math-shepherd-mistral-7b-rl",
+        "b": "mistral-medium-latest",
+        "margin_original": 0.03599999999999992,
+        "margin_replica": -0.0010000000000000009,
+        "swing": 0.03699999999999992,
+        "standard_error": 0.023284680061856227,
+        "z": 1.5890276311166256,
+        "p_value": 0.11205415465224,
+        "significant": false,
+        "survives_holm": false
+      },
+      {
+        "found": true,
+        "a": "math-shepherd-mistral-7b-rl",
+        "b": "mistral-small-latest",
+        "margin_original": 0.03599999999999992,
+        "margin_replica": -0.014000000000000012,
+        "swing": 0.04999999999999993,
+        "standard_error": 0.023163203619783523,
+        "z": 2.158596056950227,
+        "p_value": 0.030881518935816032,
+        "significant": true,
+        "survives_holm": false
+      },
+      {
+        "found": true,
+        "a": "math-shepherd-mistral-7b-rl",
+        "b": "gemini-pro",
+        "margin_original": 0.03399999999999992,
+        "margin_replica": -0.039000000000000035,
+        "swing": 0.07299999999999995,
+        "standard_error": 0.022891319556762164,
+        "z": 3.1889817368975364,
+        "p_value": 0.0014277489751526318,
+        "significant": true,
+        "survives_holm": true
+      },
+      {
+        "found": true,
+        "a": "Meta-Llama-3-8B-Instruct",
+        "b": "claude-3-sonnet-20240229",
+        "margin_original": 0.03300000000000003,
+        "margin_replica": -0.04500000000000004,
+        "swing": 0.07800000000000007,
+        "standard_error": 0.025173740922408396,
+        "z": 3.098466780937131,
+        "p_value": 0.0019452477652444067,
+        "significant": true,
+        "survives_holm": true
+      }
+    ],
+    "verdict": "5 of 9 reversals survive Holm-Bonferroni correction (7 were significant before correcting for having tested 9). These are real swings, not noise \u2014 though whether they concentrate in contaminated families is a separate question this sample cannot settle."
+  },
   "raw": {
     "pairs_considered": 1953,
     "flips": 45,

@@ -146,3 +146,72 @@ class TestHonesty:
         from ranksafe import published
         doc = " ".join(published.__doc__.split())
         assert "It uses someone else's measurements" in doc
+
+
+class TestEachReversalIsTested:
+    """
+    The reversals were quoted before they were tested. A swing is a
+    difference of differences and needs the standard error of that quantity,
+    not of either accuracy.
+    """
+
+    def test_the_headline_reversal_is_a_real_swing(self, data):
+        from ranksafe.published import reversal_significance
+        r = reversal_significance(data, "Phi-3-medium-128k-instruct",
+                                  "gemini-1.5-flash-preview-0514")
+        assert r["found"]
+        assert r["swing"] > 0.07
+        assert r["z"] > 3
+        assert r["significant"]
+
+    def test_an_unknown_model_returns_not_found_rather_than_zero(self, data):
+        from ranksafe.published import reversal_significance
+        assert not reversal_significance(data, "nope", "gpt-4o")["found"]
+
+    def test_the_swing_is_a_difference_of_differences(self, data):
+        from ranksafe.published import reversal_significance
+        r = reversal_significance(data, "Phi-3-medium-128k-instruct",
+                                  "gemini-1.5-flash-preview-0514")
+        assert abs(r["swing"] - (r["margin_original"] - r["margin_replica"])) < 1e-9
+
+
+class TestMultipleComparisons:
+    """
+    Nine tests at alpha 0.05 expect roughly half a false positive. A count of
+    how many were significant is not interpretable without saying how many
+    were tried.
+    """
+
+    def test_correction_is_applied_and_costs_something(self, data):
+        from ranksafe.published import test_all_reversals
+        t = test_all_reversals(data, 0.03)
+        assert t["significant_holm"] < t["significant_uncorrected"]
+        assert t["significant_holm"] >= 1
+
+    def test_the_expected_false_positive_count_is_stated(self, data):
+        from ranksafe.published import test_all_reversals
+        t = test_all_reversals(data, 0.03)
+        assert t["expected_false_positives_uncorrected"] == pytest.approx(
+            0.05 * t["tests"])
+
+    def test_holm_is_a_step_down_not_plain_bonferroni(self, data):
+        """
+        Holm compares the i-th smallest p to alpha/(n-i), so it is uniformly
+        more powerful than Bonferroni at the same family-wise guarantee. The
+        count must be at least what Bonferroni would give.
+        """
+        from ranksafe.published import test_all_reversals
+        t = test_all_reversals(data, 0.03)
+        bonf = sum(1 for r in t["results"] if r["p_value"] <= 0.05 / t["tests"])
+        assert t["significant_holm"] >= bonf
+
+    def test_the_verdict_separates_the_two_questions(self, data):
+        """
+        The swings are real; whether they concentrate in contaminated
+        families is a separate claim this sample cannot settle. Collapsing
+        them is how the retracted version went wrong.
+        """
+        from ranksafe.published import test_all_reversals
+        v = test_all_reversals(data, 0.03)["verdict"]
+        assert "real swings" in v
+        assert "separate question this sample cannot settle" in v
