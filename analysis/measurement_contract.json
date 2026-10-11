@@ -1,0 +1,23 @@
+{
+  "decision": "Choose which candidate comparisons justify a model procurement or release decision.",
+  "primary_outcome": "Prespecified paired performance differences on decision-relevant tasks, adjusted across the searched comparison family.",
+  "denominator": "All searched comparisons for multiplicity; all eligible paired task items for performance estimation.",
+  "independence_unit": "Paired task item, with shared-source or benchmark clustering where applicable.",
+  "quality_guardrail": "Full search-family accounting, practical effect size, critical task slices and procurement cost.",
+  "minimum_data": "Candidate IDs, complete search history, item-level paired outcomes, task weights, comparison family and procurement assumptions.",
+  "failure_handling": "Aggregate scores cannot reconstruct missing paired covariance. Report approximate inference and do not invent item-level precision.",
+  "release_rule": "No selected reversal is a confirmed discovery unless it survives the appropriate family correction and practical decision threshold.",
+  "reversal": "Results fail full-family correction, paired evidence contradicts the aggregate ranking, or relevant task weights change.",
+  "project": "ranksafe",
+  "status": "PROPOSED MEASUREMENT CONTRACT; NOT AN EXECUTED DOMAIN EXPERIMENT",
+  "defense": [
+    [
+      "Why report that none of nine reversals survives?",
+      "It prevents selection after searching 1,953 pairs from being presented as confirmatory evidence. A credible negative result can prevent a bad purchase."
+    ],
+    [
+      "What would make the conclusion stronger?",
+      "Retained paired item outcomes, a prespecified comparison family and decision-specific task weights, not more selective headline examples."
+    ]
+  ]
+}
