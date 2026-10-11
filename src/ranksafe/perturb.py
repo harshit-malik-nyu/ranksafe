@@ -152,7 +152,7 @@ def verify_chain(p: Problem, tol: float = 1e-6) -> bool:
     cannot reproduce its own answer cannot be used to compute a perturbed
     one, and the dataset contains some.
     """
-    if not p.usable:
+    if not p.usable or p.final is None:
         return False
     for s in p.steps:
         got = evaluate(s.expr)

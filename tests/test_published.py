@@ -187,13 +187,14 @@ class TestMultipleComparisons:
         from ranksafe.published import test_all_reversals
         t = test_all_reversals(data, 0.03)
         assert t["significant_holm"] < t["significant_uncorrected"]
-        assert t["significant_holm"] >= 1
+        assert t["significant_holm"] == 0
+        assert t["family_size"] == 1953
 
     def test_the_expected_false_positive_count_is_stated(self, data):
         from ranksafe.published import test_all_reversals
         t = test_all_reversals(data, 0.03)
         assert t["expected_false_positives_uncorrected"] == pytest.approx(
-            0.05 * t["tests"])
+            0.05 * t["family_size"])
 
     def test_holm_is_a_step_down_not_plain_bonferroni(self, data):
         """
@@ -203,7 +204,7 @@ class TestMultipleComparisons:
         """
         from ranksafe.published import test_all_reversals
         t = test_all_reversals(data, 0.03)
-        bonf = sum(1 for r in t["results"] if r["p_value"] <= 0.05 / t["tests"])
+        bonf = sum(1 for r in t["results"] if r["p_value"] <= 0.05 / t["family_size"])
         assert t["significant_holm"] >= bonf
 
     def test_the_verdict_separates_the_two_questions(self, data):
@@ -214,8 +215,8 @@ class TestMultipleComparisons:
         """
         from ranksafe.published import test_all_reversals
         v = test_all_reversals(data, 0.03)["verdict"]
-        assert "real swings" in v
-        assert "separate question this sample cannot settle" in v
+        assert "None" in v
+        assert "approximate" in v
 
 
 class TestTranscription:

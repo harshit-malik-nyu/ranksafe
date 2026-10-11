@@ -110,7 +110,8 @@ def balance(originals: list[Profile], variants: list[Profile]) -> dict:
     conventional threshold for "balanced" in matched designs, and is used
     here because this is exactly a matched design.
     """
-    out, worst = {}, 0.0
+    out: dict = {}
+    worst = 0.0
     for field in ("carries", "operand_digits", "divisions", "non_round",
                   "steps"):
         a = [getattr(x, field) for x in originals]

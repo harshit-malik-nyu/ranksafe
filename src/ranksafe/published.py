@@ -156,50 +156,40 @@ def inversions(data: dict, margin: float = 0.0) -> dict:
 
 
 def test_all_reversals(data: dict, margin: float = 0.03) -> dict:
+    """Holm correction over all model pairs searched, then display reversals.
+
+    Aggregate-proportion p-values are approximate because item-paired
+    covariance is unavailable. Filtering to reversals before adjustment would
+    undercount the search family. The reported expected false positives assumes
+    valid marginal tests under the complete null; it is not an estimate for
+    the selected reversals.
     """
-    Every reversal tested, with a correction for testing every reversal.
-
-    Nine tests at alpha 0.05 expect roughly half a false positive by chance,
-    so a count of "how many were significant" is not interpretable without
-    saying how many were tried. Holm-Bonferroni controls the family-wise
-    error rate and is used rather than Bonferroni because it is uniformly
-    more powerful at the same guarantee.
-
-    Reported both ways. The uncorrected count is what the individual tests
-    say; the corrected count is what survives having asked nine questions.
-    """
-    r = inversions(data, margin)
-    tests = [reversal_significance(data, f["a"], f["b"])
-             for f in r["all_flips"]]
-    tests = [t for t in tests if t.get("found")]
-    n = len(tests)
-
-    # Holm-Bonferroni: sort ascending, compare the i-th to alpha/(n-i).
-    order = sorted(range(n), key=lambda i: tests[i]["p_value"])
-    survives = [False] * n
-    for rank, idx in enumerate(order):
-        if tests[idx]["p_value"] <= 0.05 / (n - rank):
-            survives[idx] = True
-        else:
+    selected = inversions(data, margin)
+    family = [reversal_significance(data, a["model"], b["model"])
+              for a, b in combinations(data["models"], 2)]
+    order = sorted(family, key=lambda t: t["p_value"])
+    survivors = set()
+    for i, test in enumerate(order):
+        if test["p_value"] > 0.05 / (len(order)-i):
             break
-    for i, t in enumerate(tests):
-        t["survives_holm"] = survives[i]
-
-    return {
-        "margin": margin, "tests": n,
-        "significant_uncorrected": sum(1 for t in tests if t["significant"]),
-        "significant_holm": sum(survives),
-        "expected_false_positives_uncorrected": 0.05 * n,
-        "results": tests,
-        "verdict": _reversal_verdict(n, sum(1 for t in tests if t["significant"]),
-                                     sum(survives)),
-    }
+        survivors.add((test["a"], test["b"]))
+    wanted = {(f["a"], f["b"]) for f in selected["all_flips"]}
+    tests = [t for t in family if (t["a"], t["b"]) in wanted]
+    for t in tests:
+        t["survives_holm"] = (t["a"], t["b"]) in survivors
+    raw = sum(t["significant"] for t in tests)
+    corrected = sum(t["survives_holm"] for t in tests)
+    return {"margin": margin, "tests": len(tests), "family_size": len(family),
+            "significant_uncorrected": raw, "significant_holm": corrected,
+            "expected_false_positives_uncorrected": 0.05 * len(family),
+            "results": tests, "inference_status": "approximate: paired covariance unavailable",
+            "verdict": _reversal_verdict(len(tests), raw, corrected)}
 
 
 def _reversal_verdict(n: int, raw: int, holm: int) -> str:
     if holm == 0:
         return (f"None of the {n} reversals survives correction for having "
-                "tested all of them. The orderings moved; none of the "
+                "searched all model pairs. With approximate aggregate tests, none of the "
                 "individual moves can be distinguished from chance once the "
                 "search is accounted for.")
     return (f"{holm} of {n} reversals survive Holm-Bonferroni correction "

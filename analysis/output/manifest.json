@@ -1,0 +1,19 @@
+{
+  "external_services_required": false,
+  "input_sha256": {
+    "evidence/gsm1k_published.json": "b3ae73e38e724c80defa02cdbc813b8609fbbf165001c1406df44753e47f00eb"
+  },
+  "outputs": {
+    "query_1.csv": "07d93215eea9afc354392ce8d61c193738200ce3021eb064cc3f25f78e17a5bd",
+    "query_2.csv": "a30d90d77876ed882a3c1b262941d0735ee35257b5e717e3deac9164385cf84a"
+  },
+  "project": "ranksafe",
+  "quality_checks": [
+    "SQL type and domain constraints",
+    "row-count reconciliation",
+    "SQLite integrity"
+  ],
+  "query_sha256": "054553f41dd8a739afb0c67598db08359799a66a5ef44d5ad1ae6a166794f3b8",
+  "rows": 63,
+  "scope": "Published aggregate accuracy table; item-paired covariance unavailable. Descriptive ranking changes are not causal contamination evidence."
+}

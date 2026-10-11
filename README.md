@@ -1,5 +1,8 @@
 # Does a ranking survive changing the numbers?
 
+> **Validation update (2026-10-10):** The search family is 1,953 pairs, not nine selected inversions. None of those nine survives the current full-family approximate correction. See the [current decision brief](docs/decision-brief.md) and [reproducible analysis](analysis/README.md). Historical evidence and figures retain their original run context; this update supersedes conflicting claims below.
+
+
 Companies pick models from leaderboards. Procurement, architecture, "which
 model do we standardise on" — all trace back to a benchmark table.
 
@@ -270,27 +273,11 @@ nine reversals beyond a three-point margin.
 output: the pairwise figure is what the analysis looked like before the
 correction, and hiding it would make the correction unauditable.
 
-### The reversals themselves are real
+### Reversals after accounting for the search
 
-A different question from whether they cluster: is each individual swing
-distinguishable from zero? A reversal is a difference of differences, so it
-needs the standard error of *that*, not of either accuracy.
+The nine reversals beyond three points were selected from all 1,953 model pairs. Seven have unadjusted p-values below 0.05, but **none survives Holm correction over the full search family**. Correcting only the selected nine exaggerated the evidence.
 
-Of the nine reversals beyond a three-point margin, **seven are significant
-individually — and five survive Holm-Bonferroni correction** for having
-tested all nine. Nine tests at α = 0.05 expect 0.45 false positives; five
-survivors is well beyond that.
-
-The largest is `Phi-3-medium-128k-instruct` losing a **7.2-point lead** to
-`gemini-1.5-flash` and finishing 1.0 behind — an **8.2-point swing, z = 3.90,
-p = 0.0001.**
-
-So the two claims come apart cleanly:
-
-| | |
-|---|---|
-| **The reversals are real swings** | established — 5 survive correction |
-| **They concentrate in contaminated families** | suggestive — 5 of 6 distinct models, p = 0.089 |
+The largest observed swing remains 8.2 percentage points. Its approximate aggregate-proportion p-value does not survive the full-family correction. Item-paired covariance is unavailable, so even these tests require an explicit independence approximation. Descriptive changes remain useful; individual significance and causal contamination are not established.
 
 Collapsing those two is exactly how the retracted version went wrong.
 
