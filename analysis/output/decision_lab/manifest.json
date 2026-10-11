@@ -1,0 +1,19 @@
+{
+  "inputs": {
+    "decision_lab.py": "7b2dd5ffd94542ca20358b037c1d5a1b2ffe3a097994eaff934399b4bec5b523",
+    "decision_lab.sql": "31640b203483e62b777bd2e99d864f877e9eaeff71d851bbac277a3659bfee8e",
+    "decision_spec.json": "1f91ebddfe23278862cd5a128697140059c6d4e3e7585106628e0fbaba446474"
+  },
+  "outputs": {
+    "cohorts.csv": "b2cee3b9c8c50f0e6f379ec4888cfd1f39d7bed2f697ecc2bfe192e4cd87158c",
+    "economics.json": "6355f5c8dbb504a82c2b04a900103b6a1a0b1976eae7b8ceff6f283d2420855c",
+    "executive-summary.md": "e44b64ffdcf4e39638c60e072a2ae49df0dcb0694fdd8eb1d836ae5a752ebd69",
+    "experiment.json": "2b0dfce3165e85ea57bb4ae77728cb13dace8949982f684c08b333af5f2234ff",
+    "funnel.csv": "187083a95068f0c277db08858dee99e149b5660db70a39913ace12203dec6972",
+    "journeys.synthetic.csv": "9a595a2b1379bd3e0c7bc05d2cd085486d31795bc07244da8b6d315db8a95f13",
+    "segments.csv": "55e4ba03a9afa28d27bca7c4972d1c7971f4315588d9cc74c99b75b50cfaf6d1"
+  },
+  "seed": 738,
+  "source_status": "All journeys synthetic; economics assumed; observed domain evidence remains in parent manifest.",
+  "synthetic_units": 2560
+}

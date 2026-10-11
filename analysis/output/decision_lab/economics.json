@@ -1,0 +1,2403 @@
+{
+  "base_case": {
+    "cost_factor": 1.0,
+    "options": [
+      {
+        "capacity_gate_pass": true,
+        "cash_outlay_usd": 7200.0,
+        "components": [
+          {
+            "activity": "Evaluation runs",
+            "cash_outlay_usd": 7200.0,
+            "economic_cost_usd": 7200.0,
+            "quantity": 72000.0,
+            "unit": "item"
+          },
+          {
+            "activity": "Analyst review",
+            "cash_outlay_usd": 0.0,
+            "economic_cost_usd": 19800.0,
+            "quantity": 180.0,
+            "unit": "reviewer_hour"
+          }
+        ],
+        "economic_cost_usd": 29700.0,
+        "expected_incidents": 0.18,
+        "feasible": true,
+        "option": "Full paired evaluation before each selection",
+        "reviewer_hours": 180.0,
+        "risk_gate_pass": true,
+        "scenario_loss_usd": 2700.0,
+        "volume": 12.0
+      },
+      {
+        "capacity_gate_pass": true,
+        "cash_outlay_usd": 11880.0,
+        "components": [
+          {
+            "activity": "Shortlist evaluation",
+            "cash_outlay_usd": 2880.0,
+            "economic_cost_usd": 2880.0,
+            "quantity": 28800.0,
+            "unit": "item"
+          },
+          {
+            "activity": "Screen and shortlist review",
+            "cash_outlay_usd": 0.0,
+            "economic_cost_usd": 10560.0,
+            "quantity": 96.0,
+            "unit": "reviewer_hour"
+          }
+        ],
+        "economic_cost_usd": 26040.0,
+        "expected_incidents": 0.24,
+        "feasible": true,
+        "option": "Aggregate screen then paired shortlist",
+        "reviewer_hours": 96.0,
+        "risk_gate_pass": true,
+        "scenario_loss_usd": 3600.0,
+        "volume": 12.0
+      },
+      {
+        "capacity_gate_pass": true,
+        "cash_outlay_usd": 0.0,
+        "components": [
+          {
+            "activity": "Leaderboard review",
+            "cash_outlay_usd": 0.0,
+            "economic_cost_usd": 1320.0,
+            "quantity": 12.0,
+            "unit": "reviewer_hour"
+          }
+        ],
+        "economic_cost_usd": 19320.0,
+        "expected_incidents": 1.2,
+        "feasible": false,
+        "option": "Select the headline leaderboard winner",
+        "reviewer_hours": 12.0,
+        "risk_gate_pass": false,
+        "scenario_loss_usd": 18000.0,
+        "volume": 12.0
+      }
+    ],
+    "recommended_if_assumptions_hold": "Aggregate screen then paired shortlist",
+    "risk_factor": 1.0,
+    "volume_factor": 1.0
+  },
+  "break_even": [
+    {
+      "additional_fixed_usd": 9000,
+      "minimum_integer_volume_to_break_even": 9,
+      "option": "Aggregate screen then paired shortlist",
+      "qualification": "Positive unit advantage required; risk and capacity gates still apply.",
+      "relative_to": "Full paired evaluation before each selection",
+      "unit_economic_advantage_usd": 1055.0
+    },
+    {
+      "additional_fixed_usd": 0,
+      "minimum_integer_volume_to_break_even": 0,
+      "option": "Select the headline leaderboard winner",
+      "qualification": "Positive unit advantage required; risk and capacity gates still apply.",
+      "relative_to": "Full paired evaluation before each selection",
+      "unit_economic_advantage_usd": 865.0
+    }
+  ],
+  "evidence_status": "ILLUSTRATIVE PLANNING ASSUMPTIONS; NOT OBSERVED ROI",
+  "scenarios": [
+    {
+      "cost_factor": 0.75,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 2700.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 2700.0,
+              "economic_cost_usd": 2700.0,
+              "quantity": 36000.0,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 7425.0,
+              "quantity": 90.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 11475.0,
+          "expected_incidents": 0.09,
+          "feasible": true,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 90.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 1350.0,
+          "volume": 6.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10080.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 1080.0,
+              "economic_cost_usd": 1080.0,
+              "quantity": 14400.0,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 3960.0,
+              "quantity": 48.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 15840.0,
+          "expected_incidents": 0.12,
+          "feasible": true,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 48.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 1800.0,
+          "volume": 6.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 495.0,
+              "quantity": 6.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 9495.0,
+          "expected_incidents": 0.6,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 6.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 9000.0,
+          "volume": 6.0
+        }
+      ],
+      "recommended_if_assumptions_hold": "Full paired evaluation before each selection",
+      "risk_factor": 1,
+      "volume_factor": 0.5
+    },
+    {
+      "cost_factor": 0.75,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 2700.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 2700.0,
+              "economic_cost_usd": 2700.0,
+              "quantity": 36000.0,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 7425.0,
+              "quantity": 90.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 12825.0,
+          "expected_incidents": 0.18,
+          "feasible": false,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 90.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 2700.0,
+          "volume": 6.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10080.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 1080.0,
+              "economic_cost_usd": 1080.0,
+              "quantity": 14400.0,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 3960.0,
+              "quantity": 48.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 17640.0,
+          "expected_incidents": 0.24,
+          "feasible": false,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 48.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 3600.0,
+          "volume": 6.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 495.0,
+              "quantity": 6.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 18495.0,
+          "expected_incidents": 1.2,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 6.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 18000.0,
+          "volume": 6.0
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 2,
+      "volume_factor": 0.5
+    },
+    {
+      "cost_factor": 0.75,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 2700.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 2700.0,
+              "economic_cost_usd": 2700.0,
+              "quantity": 36000.0,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 7425.0,
+              "quantity": 90.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 15525.0,
+          "expected_incidents": 0.36,
+          "feasible": false,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 90.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 5400.0,
+          "volume": 6.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10080.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 1080.0,
+              "economic_cost_usd": 1080.0,
+              "quantity": 14400.0,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 3960.0,
+              "quantity": 48.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 21240.0,
+          "expected_incidents": 0.48,
+          "feasible": false,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 48.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 7200.0,
+          "volume": 6.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 495.0,
+              "quantity": 6.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 36495.0,
+          "expected_incidents": 2.4,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 6.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 36000.0,
+          "volume": 6.0
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 4,
+      "volume_factor": 0.5
+    },
+    {
+      "cost_factor": 1,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 3600.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 3600.0,
+              "economic_cost_usd": 3600.0,
+              "quantity": 36000.0,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 9900.0,
+              "quantity": 90.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 14850.0,
+          "expected_incidents": 0.09,
+          "feasible": true,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 90.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 1350.0,
+          "volume": 6.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10440.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 1440.0,
+              "economic_cost_usd": 1440.0,
+              "quantity": 14400.0,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 5280.0,
+              "quantity": 48.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 17520.0,
+          "expected_incidents": 0.12,
+          "feasible": true,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 48.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 1800.0,
+          "volume": 6.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 660.0,
+              "quantity": 6.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 9660.0,
+          "expected_incidents": 0.6,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 6.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 9000.0,
+          "volume": 6.0
+        }
+      ],
+      "recommended_if_assumptions_hold": "Full paired evaluation before each selection",
+      "risk_factor": 1,
+      "volume_factor": 0.5
+    },
+    {
+      "cost_factor": 1,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 3600.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 3600.0,
+              "economic_cost_usd": 3600.0,
+              "quantity": 36000.0,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 9900.0,
+              "quantity": 90.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 16200.0,
+          "expected_incidents": 0.18,
+          "feasible": false,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 90.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 2700.0,
+          "volume": 6.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10440.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 1440.0,
+              "economic_cost_usd": 1440.0,
+              "quantity": 14400.0,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 5280.0,
+              "quantity": 48.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 19320.0,
+          "expected_incidents": 0.24,
+          "feasible": false,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 48.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 3600.0,
+          "volume": 6.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 660.0,
+              "quantity": 6.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 18660.0,
+          "expected_incidents": 1.2,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 6.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 18000.0,
+          "volume": 6.0
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 2,
+      "volume_factor": 0.5
+    },
+    {
+      "cost_factor": 1,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 3600.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 3600.0,
+              "economic_cost_usd": 3600.0,
+              "quantity": 36000.0,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 9900.0,
+              "quantity": 90.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 18900.0,
+          "expected_incidents": 0.36,
+          "feasible": false,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 90.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 5400.0,
+          "volume": 6.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10440.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 1440.0,
+              "economic_cost_usd": 1440.0,
+              "quantity": 14400.0,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 5280.0,
+              "quantity": 48.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 22920.0,
+          "expected_incidents": 0.48,
+          "feasible": false,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 48.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 7200.0,
+          "volume": 6.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 660.0,
+              "quantity": 6.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 36660.0,
+          "expected_incidents": 2.4,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 6.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 36000.0,
+          "volume": 6.0
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 4,
+      "volume_factor": 0.5
+    },
+    {
+      "cost_factor": 1.5,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 5400.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 5400.0,
+              "economic_cost_usd": 5400.0,
+              "quantity": 36000.0,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 14850.0,
+              "quantity": 90.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 21600.0,
+          "expected_incidents": 0.09,
+          "feasible": true,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 90.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 1350.0,
+          "volume": 6.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 11160.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 2160.0,
+              "economic_cost_usd": 2160.0,
+              "quantity": 14400.0,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 7920.0,
+              "quantity": 48.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 20880.0,
+          "expected_incidents": 0.12,
+          "feasible": true,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 48.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 1800.0,
+          "volume": 6.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 990.0,
+              "quantity": 6.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 9990.0,
+          "expected_incidents": 0.6,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 6.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 9000.0,
+          "volume": 6.0
+        }
+      ],
+      "recommended_if_assumptions_hold": "Aggregate screen then paired shortlist",
+      "risk_factor": 1,
+      "volume_factor": 0.5
+    },
+    {
+      "cost_factor": 1.5,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 5400.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 5400.0,
+              "economic_cost_usd": 5400.0,
+              "quantity": 36000.0,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 14850.0,
+              "quantity": 90.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 22950.0,
+          "expected_incidents": 0.18,
+          "feasible": false,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 90.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 2700.0,
+          "volume": 6.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 11160.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 2160.0,
+              "economic_cost_usd": 2160.0,
+              "quantity": 14400.0,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 7920.0,
+              "quantity": 48.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 22680.0,
+          "expected_incidents": 0.24,
+          "feasible": false,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 48.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 3600.0,
+          "volume": 6.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 990.0,
+              "quantity": 6.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 18990.0,
+          "expected_incidents": 1.2,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 6.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 18000.0,
+          "volume": 6.0
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 2,
+      "volume_factor": 0.5
+    },
+    {
+      "cost_factor": 1.5,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 5400.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 5400.0,
+              "economic_cost_usd": 5400.0,
+              "quantity": 36000.0,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 14850.0,
+              "quantity": 90.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 25650.0,
+          "expected_incidents": 0.36,
+          "feasible": false,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 90.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 5400.0,
+          "volume": 6.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 11160.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 2160.0,
+              "economic_cost_usd": 2160.0,
+              "quantity": 14400.0,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 7920.0,
+              "quantity": 48.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 26280.0,
+          "expected_incidents": 0.48,
+          "feasible": false,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 48.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 7200.0,
+          "volume": 6.0
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 990.0,
+              "quantity": 6.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 36990.0,
+          "expected_incidents": 2.4,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 6.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 36000.0,
+          "volume": 6.0
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 4,
+      "volume_factor": 0.5
+    },
+    {
+      "cost_factor": 0.75,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 5400.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 5400.0,
+              "economic_cost_usd": 5400.0,
+              "quantity": 72000,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 14850.0,
+              "quantity": 180.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 22950.0,
+          "expected_incidents": 0.18,
+          "feasible": true,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 180.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 2700.0,
+          "volume": 12
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 11160.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 2160.0,
+              "economic_cost_usd": 2160.0,
+              "quantity": 28800,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 7920.0,
+              "quantity": 96.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 22680.0,
+          "expected_incidents": 0.24,
+          "feasible": true,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 96.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 3600.0,
+          "volume": 12
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 990.0,
+              "quantity": 12.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 18990.0,
+          "expected_incidents": 1.2,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 12.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 18000.0,
+          "volume": 12
+        }
+      ],
+      "recommended_if_assumptions_hold": "Aggregate screen then paired shortlist",
+      "risk_factor": 1,
+      "volume_factor": 1
+    },
+    {
+      "cost_factor": 0.75,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 5400.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 5400.0,
+              "economic_cost_usd": 5400.0,
+              "quantity": 72000,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 14850.0,
+              "quantity": 180.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 25650.0,
+          "expected_incidents": 0.36,
+          "feasible": false,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 180.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 5400.0,
+          "volume": 12
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 11160.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 2160.0,
+              "economic_cost_usd": 2160.0,
+              "quantity": 28800,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 7920.0,
+              "quantity": 96.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 26280.0,
+          "expected_incidents": 0.48,
+          "feasible": false,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 96.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 7200.0,
+          "volume": 12
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 990.0,
+              "quantity": 12.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 36990.0,
+          "expected_incidents": 2.4,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 12.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 36000.0,
+          "volume": 12
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 2,
+      "volume_factor": 1
+    },
+    {
+      "cost_factor": 0.75,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 5400.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 5400.0,
+              "economic_cost_usd": 5400.0,
+              "quantity": 72000,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 14850.0,
+              "quantity": 180.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 31050.0,
+          "expected_incidents": 0.72,
+          "feasible": false,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 180.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 10800.0,
+          "volume": 12
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 11160.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 2160.0,
+              "economic_cost_usd": 2160.0,
+              "quantity": 28800,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 7920.0,
+              "quantity": 96.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 33480.0,
+          "expected_incidents": 0.96,
+          "feasible": false,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 96.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 14400.0,
+          "volume": 12
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 990.0,
+              "quantity": 12.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 72990.0,
+          "expected_incidents": 4.8,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 12.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 72000.0,
+          "volume": 12
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 4,
+      "volume_factor": 1
+    },
+    {
+      "cost_factor": 1,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 7200.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 7200.0,
+              "economic_cost_usd": 7200.0,
+              "quantity": 72000,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 19800.0,
+              "quantity": 180.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 29700.0,
+          "expected_incidents": 0.18,
+          "feasible": true,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 180.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 2700.0,
+          "volume": 12
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 11880.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 2880.0,
+              "economic_cost_usd": 2880.0,
+              "quantity": 28800,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 10560.0,
+              "quantity": 96.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 26040.0,
+          "expected_incidents": 0.24,
+          "feasible": true,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 96.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 3600.0,
+          "volume": 12
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 1320.0,
+              "quantity": 12.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 19320.0,
+          "expected_incidents": 1.2,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 12.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 18000.0,
+          "volume": 12
+        }
+      ],
+      "recommended_if_assumptions_hold": "Aggregate screen then paired shortlist",
+      "risk_factor": 1,
+      "volume_factor": 1
+    },
+    {
+      "cost_factor": 1,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 7200.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 7200.0,
+              "economic_cost_usd": 7200.0,
+              "quantity": 72000,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 19800.0,
+              "quantity": 180.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 32400.0,
+          "expected_incidents": 0.36,
+          "feasible": false,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 180.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 5400.0,
+          "volume": 12
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 11880.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 2880.0,
+              "economic_cost_usd": 2880.0,
+              "quantity": 28800,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 10560.0,
+              "quantity": 96.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 29640.0,
+          "expected_incidents": 0.48,
+          "feasible": false,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 96.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 7200.0,
+          "volume": 12
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 1320.0,
+              "quantity": 12.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 37320.0,
+          "expected_incidents": 2.4,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 12.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 36000.0,
+          "volume": 12
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 2,
+      "volume_factor": 1
+    },
+    {
+      "cost_factor": 1,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 7200.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 7200.0,
+              "economic_cost_usd": 7200.0,
+              "quantity": 72000,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 19800.0,
+              "quantity": 180.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 37800.0,
+          "expected_incidents": 0.72,
+          "feasible": false,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 180.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 10800.0,
+          "volume": 12
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 11880.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 2880.0,
+              "economic_cost_usd": 2880.0,
+              "quantity": 28800,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 10560.0,
+              "quantity": 96.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 36840.0,
+          "expected_incidents": 0.96,
+          "feasible": false,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 96.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 14400.0,
+          "volume": 12
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 1320.0,
+              "quantity": 12.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 73320.0,
+          "expected_incidents": 4.8,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 12.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 72000.0,
+          "volume": 12
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 4,
+      "volume_factor": 1
+    },
+    {
+      "cost_factor": 1.5,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10800.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 10800.0,
+              "economic_cost_usd": 10800.0,
+              "quantity": 72000,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 29700.0,
+              "quantity": 180.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 43200.0,
+          "expected_incidents": 0.18,
+          "feasible": true,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 180.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 2700.0,
+          "volume": 12
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 13320.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 4320.0,
+              "economic_cost_usd": 4320.0,
+              "quantity": 28800,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 15840.0,
+              "quantity": 96.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 32760.0,
+          "expected_incidents": 0.24,
+          "feasible": true,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 96.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 3600.0,
+          "volume": 12
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 1980.0,
+              "quantity": 12.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 19980.0,
+          "expected_incidents": 1.2,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 12.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 18000.0,
+          "volume": 12
+        }
+      ],
+      "recommended_if_assumptions_hold": "Aggregate screen then paired shortlist",
+      "risk_factor": 1,
+      "volume_factor": 1
+    },
+    {
+      "cost_factor": 1.5,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10800.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 10800.0,
+              "economic_cost_usd": 10800.0,
+              "quantity": 72000,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 29700.0,
+              "quantity": 180.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 45900.0,
+          "expected_incidents": 0.36,
+          "feasible": false,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 180.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 5400.0,
+          "volume": 12
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 13320.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 4320.0,
+              "economic_cost_usd": 4320.0,
+              "quantity": 28800,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 15840.0,
+              "quantity": 96.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 36360.0,
+          "expected_incidents": 0.48,
+          "feasible": false,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 96.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 7200.0,
+          "volume": 12
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 1980.0,
+              "quantity": 12.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 37980.0,
+          "expected_incidents": 2.4,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 12.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 36000.0,
+          "volume": 12
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 2,
+      "volume_factor": 1
+    },
+    {
+      "cost_factor": 1.5,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10800.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 10800.0,
+              "economic_cost_usd": 10800.0,
+              "quantity": 72000,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 29700.0,
+              "quantity": 180.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 51300.0,
+          "expected_incidents": 0.72,
+          "feasible": false,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 180.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 10800.0,
+          "volume": 12
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 13320.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 4320.0,
+              "economic_cost_usd": 4320.0,
+              "quantity": 28800,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 15840.0,
+              "quantity": 96.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 43560.0,
+          "expected_incidents": 0.96,
+          "feasible": false,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 96.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 14400.0,
+          "volume": 12
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 1980.0,
+              "quantity": 12.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 73980.0,
+          "expected_incidents": 4.8,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 12.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 72000.0,
+          "volume": 12
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 4,
+      "volume_factor": 1
+    },
+    {
+      "cost_factor": 0.75,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10800.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 10800.0,
+              "economic_cost_usd": 10800.0,
+              "quantity": 144000,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 29700.0,
+              "quantity": 360.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 45900.0,
+          "expected_incidents": 0.36,
+          "feasible": true,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 360.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 5400.0,
+          "volume": 24
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 13320.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 4320.0,
+              "economic_cost_usd": 4320.0,
+              "quantity": 57600,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 15840.0,
+              "quantity": 192.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 36360.0,
+          "expected_incidents": 0.48,
+          "feasible": true,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 192.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 7200.0,
+          "volume": 24
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 1980.0,
+              "quantity": 24.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 37980.0,
+          "expected_incidents": 2.4,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 24.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 36000.0,
+          "volume": 24
+        }
+      ],
+      "recommended_if_assumptions_hold": "Aggregate screen then paired shortlist",
+      "risk_factor": 1,
+      "volume_factor": 2
+    },
+    {
+      "cost_factor": 0.75,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10800.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 10800.0,
+              "economic_cost_usd": 10800.0,
+              "quantity": 144000,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 29700.0,
+              "quantity": 360.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 51300.0,
+          "expected_incidents": 0.72,
+          "feasible": false,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 360.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 10800.0,
+          "volume": 24
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 13320.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 4320.0,
+              "economic_cost_usd": 4320.0,
+              "quantity": 57600,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 15840.0,
+              "quantity": 192.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 43560.0,
+          "expected_incidents": 0.96,
+          "feasible": false,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 192.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 14400.0,
+          "volume": 24
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 1980.0,
+              "quantity": 24.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 73980.0,
+          "expected_incidents": 4.8,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 24.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 72000.0,
+          "volume": 24
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 2,
+      "volume_factor": 2
+    },
+    {
+      "cost_factor": 0.75,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 10800.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 10800.0,
+              "economic_cost_usd": 10800.0,
+              "quantity": 144000,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 29700.0,
+              "quantity": 360.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 62100.0,
+          "expected_incidents": 1.44,
+          "feasible": false,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 360.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 21600.0,
+          "volume": 24
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 13320.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 4320.0,
+              "economic_cost_usd": 4320.0,
+              "quantity": 57600,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 15840.0,
+              "quantity": 192.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 57960.0,
+          "expected_incidents": 1.92,
+          "feasible": false,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 192.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 28800.0,
+          "volume": 24
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 1980.0,
+              "quantity": 24.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 145980.0,
+          "expected_incidents": 9.6,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 24.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 144000.0,
+          "volume": 24
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 4,
+      "volume_factor": 2
+    },
+    {
+      "cost_factor": 1,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 14400.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 14400.0,
+              "economic_cost_usd": 14400.0,
+              "quantity": 144000,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 39600.0,
+              "quantity": 360.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 59400.0,
+          "expected_incidents": 0.36,
+          "feasible": true,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 360.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 5400.0,
+          "volume": 24
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 14760.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 5760.0,
+              "economic_cost_usd": 5760.0,
+              "quantity": 57600,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 21120.0,
+              "quantity": 192.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 43080.0,
+          "expected_incidents": 0.48,
+          "feasible": true,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 192.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 7200.0,
+          "volume": 24
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 2640.0,
+              "quantity": 24.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 38640.0,
+          "expected_incidents": 2.4,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 24.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 36000.0,
+          "volume": 24
+        }
+      ],
+      "recommended_if_assumptions_hold": "Aggregate screen then paired shortlist",
+      "risk_factor": 1,
+      "volume_factor": 2
+    },
+    {
+      "cost_factor": 1,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 14400.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 14400.0,
+              "economic_cost_usd": 14400.0,
+              "quantity": 144000,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 39600.0,
+              "quantity": 360.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 64800.0,
+          "expected_incidents": 0.72,
+          "feasible": false,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 360.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 10800.0,
+          "volume": 24
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 14760.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 5760.0,
+              "economic_cost_usd": 5760.0,
+              "quantity": 57600,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 21120.0,
+              "quantity": 192.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 50280.0,
+          "expected_incidents": 0.96,
+          "feasible": false,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 192.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 14400.0,
+          "volume": 24
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 2640.0,
+              "quantity": 24.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 74640.0,
+          "expected_incidents": 4.8,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 24.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 72000.0,
+          "volume": 24
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 2,
+      "volume_factor": 2
+    },
+    {
+      "cost_factor": 1,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 14400.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 14400.0,
+              "economic_cost_usd": 14400.0,
+              "quantity": 144000,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 39600.0,
+              "quantity": 360.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 75600.0,
+          "expected_incidents": 1.44,
+          "feasible": false,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 360.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 21600.0,
+          "volume": 24
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 14760.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 5760.0,
+              "economic_cost_usd": 5760.0,
+              "quantity": 57600,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 21120.0,
+              "quantity": 192.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 64680.0,
+          "expected_incidents": 1.92,
+          "feasible": false,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 192.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 28800.0,
+          "volume": 24
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 2640.0,
+              "quantity": 24.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 146640.0,
+          "expected_incidents": 9.6,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 24.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 144000.0,
+          "volume": 24
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 4,
+      "volume_factor": 2
+    },
+    {
+      "cost_factor": 1.5,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 21600.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 21600.0,
+              "economic_cost_usd": 21600.0,
+              "quantity": 144000,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 59400.0,
+              "quantity": 360.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 86400.0,
+          "expected_incidents": 0.36,
+          "feasible": true,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 360.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 5400.0,
+          "volume": 24
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 17640.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 8640.0,
+              "economic_cost_usd": 8640.0,
+              "quantity": 57600,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 31680.0,
+              "quantity": 192.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 56520.0,
+          "expected_incidents": 0.48,
+          "feasible": true,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 192.0,
+          "risk_gate_pass": true,
+          "scenario_loss_usd": 7200.0,
+          "volume": 24
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 3960.0,
+              "quantity": 24.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 39960.0,
+          "expected_incidents": 2.4,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 24.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 36000.0,
+          "volume": 24
+        }
+      ],
+      "recommended_if_assumptions_hold": "Aggregate screen then paired shortlist",
+      "risk_factor": 1,
+      "volume_factor": 2
+    },
+    {
+      "cost_factor": 1.5,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 21600.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 21600.0,
+              "economic_cost_usd": 21600.0,
+              "quantity": 144000,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 59400.0,
+              "quantity": 360.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 91800.0,
+          "expected_incidents": 0.72,
+          "feasible": false,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 360.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 10800.0,
+          "volume": 24
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 17640.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 8640.0,
+              "economic_cost_usd": 8640.0,
+              "quantity": 57600,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 31680.0,
+              "quantity": 192.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 63720.0,
+          "expected_incidents": 0.96,
+          "feasible": false,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 192.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 14400.0,
+          "volume": 24
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 3960.0,
+              "quantity": 24.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 75960.0,
+          "expected_incidents": 4.8,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 24.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 72000.0,
+          "volume": 24
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 2,
+      "volume_factor": 2
+    },
+    {
+      "cost_factor": 1.5,
+      "options": [
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 21600.0,
+          "components": [
+            {
+              "activity": "Evaluation runs",
+              "cash_outlay_usd": 21600.0,
+              "economic_cost_usd": 21600.0,
+              "quantity": 144000,
+              "unit": "item"
+            },
+            {
+              "activity": "Analyst review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 59400.0,
+              "quantity": 360.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 102600.0,
+          "expected_incidents": 1.44,
+          "feasible": false,
+          "option": "Full paired evaluation before each selection",
+          "reviewer_hours": 360.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 21600.0,
+          "volume": 24
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 17640.0,
+          "components": [
+            {
+              "activity": "Shortlist evaluation",
+              "cash_outlay_usd": 8640.0,
+              "economic_cost_usd": 8640.0,
+              "quantity": 57600,
+              "unit": "item"
+            },
+            {
+              "activity": "Screen and shortlist review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 31680.0,
+              "quantity": 192.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 78120.0,
+          "expected_incidents": 1.92,
+          "feasible": false,
+          "option": "Aggregate screen then paired shortlist",
+          "reviewer_hours": 192.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 28800.0,
+          "volume": 24
+        },
+        {
+          "capacity_gate_pass": true,
+          "cash_outlay_usd": 0.0,
+          "components": [
+            {
+              "activity": "Leaderboard review",
+              "cash_outlay_usd": 0.0,
+              "economic_cost_usd": 3960.0,
+              "quantity": 24.0,
+              "unit": "reviewer_hour"
+            }
+          ],
+          "economic_cost_usd": 147960.0,
+          "expected_incidents": 9.6,
+          "feasible": false,
+          "option": "Select the headline leaderboard winner",
+          "reviewer_hours": 24.0,
+          "risk_gate_pass": false,
+          "scenario_loss_usd": 144000.0,
+          "volume": 24
+        }
+      ],
+      "recommended_if_assumptions_hold": null,
+      "risk_factor": 4,
+      "volume_factor": 2
+    }
+  ]
+}

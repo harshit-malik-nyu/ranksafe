@@ -1,0 +1,5 @@
+segment,arm,assigned,activated,activation_itt,incidents,incident_itt
+aggregate_only,control,640,224,0.35,1,0.0015625
+aggregate_only,treatment,640,183,0.2859375,15,0.0234375
+paired_data_available,control,640,320,0.5,1,0.0015625
+paired_data_available,treatment,640,408,0.6375,0,0.0

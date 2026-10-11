@@ -1,0 +1,33 @@
+{
+  "allocation_p": 1.0,
+  "decision": "HOLD",
+  "guardrail_gate_pass": false,
+  "incident_itt": {
+    "ci95": [
+      0.003979934888940983,
+      0.01776751548534827
+    ],
+    "control_rate": 0.0015625,
+    "difference": 0.01015625,
+    "treatment_rate": 0.01171875
+  },
+  "n_control": 1280,
+  "n_treatment": 1280,
+  "planning_guardrail_n_per_arm": 6217,
+  "planning_n_per_arm": 6217,
+  "planning_note": "Approximate per-endpoint power .80 with 95% intervals; primary alternative exceeds the nonzero launch margin. Guardrail assumes .01 incidence and no true increase. Maximum is a starting budget, not guaranteed joint power; simulate joint power and rare-event behavior before a real trial. Cluster randomization needs design-effect inflation. No peeking.",
+  "planning_primary_n_per_arm": 4347,
+  "primary": {
+    "ci95": [
+      -0.0017634645405341307,
+      0.07504760803638474
+    ],
+    "control_rate": 0.425,
+    "difference": 0.03671875000000002,
+    "treatment_rate": 0.46171875
+  },
+  "primary_gate_pass": false,
+  "segment_note": "Segment estimates are exploratory and not independent discoveries. Confirm a prespecified interaction before segment rollout.",
+  "status": "SYNTHETIC QA ONLY; never a causal claim about real users",
+  "unit": "procurement analyst / decision team"
+}

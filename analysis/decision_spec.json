@@ -1,0 +1,120 @@
+{
+  "project": "ranksafe",
+  "title": "Spend model-selection effort on prespecified comparisons, not rank noise",
+  "decision_owner": "Model procurement lead",
+  "observed_evidence": "None of nine selected reversals survives Holm correction over all 1,953 searched pairs. Missing item-paired covariance prevents exact paired inference from the aggregate table.",
+  "executive_recommendation": "Use rank sensitivity to identify a shortlist, then collect paired task evidence for the actual selection. A descriptive reversal is a prompt to investigate, not proof of superiority.",
+  "priorities": [
+    "Choose the relevant task and candidate pair before confirmatory evaluation.",
+    "Separate exploratory rank sensitivity from the selection test.",
+    "Do not promote a model merely because a different aggregate benchmark changes its rank."
+  ],
+  "reversal": "At low decision volume, fixed shortlist tooling can cost more than direct paired evaluation; missing paired evidence prevents a definitive winner.",
+  "uncertainty": "Assumed procurement-loss rates are independent scenario inputs, not measured by leaderboard inversions.",
+  "economics": {
+    "evidence_status": "ILLUSTRATIVE ASSUMPTIONS, NOT MEASURED COSTS OR RISK",
+    "period": "one planning year",
+    "volume": 12,
+    "review_capacity_hours": 400,
+    "loss_per_incident_usd": 15000,
+    "max_incident_rate": 0.025,
+    "options": [
+      {
+        "name": "Full paired evaluation before each selection",
+        "fixed_usd": 0,
+        "incident_rate": 0.015,
+        "activities": [
+          {
+            "name": "Evaluation runs",
+            "unit": "item",
+            "units_per_case": 6000,
+            "usd_per_unit": 0.1,
+            "cash": true
+          },
+          {
+            "name": "Analyst review",
+            "unit": "reviewer_hour",
+            "units_per_case": 15.0,
+            "usd_per_unit": 110,
+            "cash": false
+          }
+        ]
+      },
+      {
+        "name": "Aggregate screen then paired shortlist",
+        "fixed_usd": 9000,
+        "incident_rate": 0.02,
+        "activities": [
+          {
+            "name": "Shortlist evaluation",
+            "unit": "item",
+            "units_per_case": 2400,
+            "usd_per_unit": 0.1,
+            "cash": true
+          },
+          {
+            "name": "Screen and shortlist review",
+            "unit": "reviewer_hour",
+            "units_per_case": 8.0,
+            "usd_per_unit": 110,
+            "cash": false
+          }
+        ]
+      },
+      {
+        "name": "Select the headline leaderboard winner",
+        "fixed_usd": 0,
+        "incident_rate": 0.1,
+        "activities": [
+          {
+            "name": "Leaderboard review",
+            "unit": "reviewer_hour",
+            "units_per_case": 1.0,
+            "usd_per_unit": 110,
+            "cash": false
+          }
+        ]
+      }
+    ]
+  },
+  "product": {
+    "seed": 738,
+    "randomization_unit": "procurement analyst / decision team",
+    "stages": [
+      "comparison_opened",
+      "sensitivity_audit_completed",
+      "qualified_shortlist_exported"
+    ],
+    "incident_definition": "unsupported superiority claim exported",
+    "retention_interpretation": "team performs another eligible selection audit",
+    "observation_day": 56,
+    "minimum_activation_lift": 0.02,
+    "maximum_incident_increase": 0.005,
+    "planning_baseline": 0.45,
+    "minimum_detectable_effect": 0.05,
+    "segments": [
+      {
+        "name": "paired_data_available",
+        "start_probability": 0.9,
+        "control_activation": 0.64,
+        "treatment_delta": 0.13,
+        "apply_probability": 0.88,
+        "control_incident": 0.004,
+        "treatment_incident": 0.004,
+        "return7": 0.55,
+        "return28": 0.35
+      },
+      {
+        "name": "aggregate_only",
+        "start_probability": 0.8200000000000001,
+        "control_activation": 0.52,
+        "treatment_delta": -0.09,
+        "apply_probability": 0.8,
+        "control_incident": 0.01,
+        "treatment_incident": 0.064,
+        "return7": 0.43000000000000005,
+        "return28": 0.24999999999999997
+      }
+    ]
+  }
+}
