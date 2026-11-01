@@ -1,0 +1,313 @@
+{
+  "cases": {
+    "mixed_ties_and_flips": {
+      "inputs": [
+        {
+          "model": "a",
+          "original": {
+            "n": 100,
+            "right": 80,
+            "unparsed": 0
+          },
+          "variant": {
+            "n": 100,
+            "right": 50,
+            "unparsed": 0
+          }
+        },
+        {
+          "model": "b",
+          "original": {
+            "n": 100,
+            "right": 80,
+            "unparsed": 0
+          },
+          "variant": {
+            "n": 100,
+            "right": 60,
+            "unparsed": 0
+          }
+        },
+        {
+          "model": "c",
+          "original": {
+            "n": 100,
+            "right": 70,
+            "unparsed": 0
+          },
+          "variant": {
+            "n": 100,
+            "right": 70,
+            "unparsed": 0
+          }
+        }
+      ],
+      "result": {
+        "comparison_scope": "Descriptive ordering on supplied counts; tied pairs excluded. Equal counts do not establish matched item identity.",
+        "flip_rate": 1.0,
+        "flips": 2,
+        "min_margin": 0.0,
+        "models": 3,
+        "pairs": [
+          {
+            "flipped": true,
+            "margin_original": 0.10000000000000009,
+            "margin_variant": -0.19999999999999996,
+            "pair": [
+              "a",
+              "c"
+            ]
+          },
+          {
+            "flipped": true,
+            "margin_original": 0.10000000000000009,
+            "margin_variant": -0.09999999999999998,
+            "pair": [
+              "b",
+              "c"
+            ]
+          }
+        ],
+        "pairs_below_margin": 0,
+        "pairs_considered": 2,
+        "pairs_tied_original": 1,
+        "pairs_tied_variant": 0,
+        "power": {
+          "items": 100,
+          "note": "A flip is an interaction and needs four times the sample of a drop of the same size.",
+          "power": 0.8,
+          "smallest_detectable_drop": 0.1252913609152682,
+          "smallest_detectable_flip": 0.2505827218305364
+        },
+        "verdict": "2 of 2 orderings flipped. A table that reorders when the numbers in the questions change is not a basis for choosing a model, whatever caused it. Tied pairs were excluded; this is not evidence that every pair retained a strict ordering."
+      }
+    },
+    "observed_order_preserved": {
+      "inputs": [
+        {
+          "model": "a",
+          "original": {
+            "n": 100,
+            "right": 80,
+            "unparsed": 0
+          },
+          "variant": {
+            "n": 100,
+            "right": 70,
+            "unparsed": 0
+          }
+        },
+        {
+          "model": "b",
+          "original": {
+            "n": 100,
+            "right": 70,
+            "unparsed": 0
+          },
+          "variant": {
+            "n": 100,
+            "right": 60,
+            "unparsed": 0
+          }
+        }
+      ],
+      "result": {
+        "comparison_scope": "Descriptive ordering on supplied counts; tied pairs excluded. Equal counts do not establish matched item identity.",
+        "flip_rate": 0.0,
+        "flips": 0,
+        "min_margin": 0.0,
+        "models": 2,
+        "pairs": [
+          {
+            "flipped": false,
+            "margin_original": 0.10000000000000009,
+            "margin_variant": 0.09999999999999998,
+            "pair": [
+              "a",
+              "b"
+            ]
+          }
+        ],
+        "pairs_below_margin": 0,
+        "pairs_considered": 1,
+        "pairs_tied_original": 0,
+        "pairs_tied_variant": 0,
+        "power": {
+          "items": 100,
+          "note": "A flip is an interaction and needs four times the sample of a drop of the same size.",
+          "power": 0.8,
+          "smallest_detectable_drop": 0.1252913609152682,
+          "smallest_detectable_flip": 0.2505827218305364
+        },
+        "verdict": "No ordering flipped. Under the planning assumptions, the 80%-power effect target is 25.1 points, not a hard detection limit. This is a statement about the sample, not about the leaderboard. Scores moved by +10.0 to +10.0 points. Detecting a flip the size the literature reports needs roughly four times the items of detecting the drop itself."
+      }
+    },
+    "original_tie": {
+      "inputs": [
+        {
+          "model": "a",
+          "original": {
+            "n": 100,
+            "right": 80,
+            "unparsed": 0
+          },
+          "variant": {
+            "n": 100,
+            "right": 70,
+            "unparsed": 0
+          }
+        },
+        {
+          "model": "b",
+          "original": {
+            "n": 100,
+            "right": 80,
+            "unparsed": 0
+          },
+          "variant": {
+            "n": 100,
+            "right": 60,
+            "unparsed": 0
+          }
+        }
+      ],
+      "result": {
+        "comparison_scope": "Descriptive ordering on supplied counts; tied pairs excluded. Equal counts do not establish matched item identity.",
+        "flip_rate": null,
+        "flips": 0,
+        "min_margin": 0.0,
+        "models": 2,
+        "pairs": [],
+        "pairs_below_margin": 0,
+        "pairs_considered": 0,
+        "pairs_tied_original": 1,
+        "pairs_tied_variant": 0,
+        "power": {
+          "items": 100,
+          "note": "A flip is an interaction and needs four times the sample of a drop of the same size.",
+          "power": 0.8,
+          "smallest_detectable_drop": 0.1252913609152682,
+          "smallest_detectable_flip": 0.2505827218305364
+        },
+        "verdict": "No pairs were separated enough to have an ordering. Tied pairs were excluded; this is not evidence that every pair retained a strict ordering."
+      }
+    },
+    "reverse_parser_asymmetry": {
+      "inputs": [
+        {
+          "model": "a",
+          "original": {
+            "n": 100,
+            "right": 60,
+            "unparsed": 20
+          },
+          "variant": {
+            "n": 100,
+            "right": 70,
+            "unparsed": 0
+          }
+        },
+        {
+          "model": "b",
+          "original": {
+            "n": 100,
+            "right": 50,
+            "unparsed": 0
+          },
+          "variant": {
+            "n": 100,
+            "right": 60,
+            "unparsed": 0
+          }
+        }
+      ],
+      "result": {
+        "comparison_scope": "Descriptive ordering on supplied counts; tied pairs excluded. Equal counts do not establish matched item identity.",
+        "flip_rate": 0.0,
+        "flips": 0,
+        "min_margin": 0.0,
+        "models": 2,
+        "pairs": [
+          {
+            "flipped": false,
+            "margin_original": 0.09999999999999998,
+            "margin_variant": 0.09999999999999998,
+            "pair": [
+              "a",
+              "b"
+            ]
+          }
+        ],
+        "pairs_below_margin": 0,
+        "pairs_considered": 1,
+        "pairs_tied_original": 0,
+        "pairs_tied_variant": 0,
+        "power": {
+          "items": 100,
+          "note": "A flip is an interaction and needs four times the sample of a drop of the same size.",
+          "power": 0.8,
+          "smallest_detectable_drop": 0.1252913609152682,
+          "smallest_detectable_flip": 0.2505827218305364
+        },
+        "verdict": "Unusable: the parser failed 20.0 points more often in one arm than the other. That difference is indistinguishable from a capability drop and has to be fixed before any of these numbers mean anything."
+      }
+    },
+    "variant_tie": {
+      "inputs": [
+        {
+          "model": "a",
+          "original": {
+            "n": 100,
+            "right": 80,
+            "unparsed": 0
+          },
+          "variant": {
+            "n": 100,
+            "right": 70,
+            "unparsed": 0
+          }
+        },
+        {
+          "model": "b",
+          "original": {
+            "n": 100,
+            "right": 70,
+            "unparsed": 0
+          },
+          "variant": {
+            "n": 100,
+            "right": 70,
+            "unparsed": 0
+          }
+        }
+      ],
+      "result": {
+        "comparison_scope": "Descriptive ordering on supplied counts; tied pairs excluded. Equal counts do not establish matched item identity.",
+        "flip_rate": null,
+        "flips": 0,
+        "min_margin": 0.0,
+        "models": 2,
+        "pairs": [],
+        "pairs_below_margin": 0,
+        "pairs_considered": 0,
+        "pairs_tied_original": 0,
+        "pairs_tied_variant": 1,
+        "power": {
+          "items": 100,
+          "note": "A flip is an interaction and needs four times the sample of a drop of the same size.",
+          "power": 0.8,
+          "smallest_detectable_drop": 0.1252913609152682,
+          "smallest_detectable_flip": 0.2505827218305364
+        },
+        "verdict": "No pairs were separated enough to have an ordering. Tied pairs were excluded; this is not evidence that every pair retained a strict ordering."
+      }
+    }
+  },
+  "scope": "Synthetic acceptance cases, not model performance or procurement evidence",
+  "source_sha256": {
+    "analysis/rank_review.py": "e22f516a0e046057ba3e1b756c9a2673e25d2ba4dc27894b89c83d3b31e8dfc1",
+    "src/ranksafe/power.py": "4c76c779ad5a7470acc938099c03160a4243a57f2ce739d9e5e72a1d6db7bda2",
+    "src/ranksafe/score.py": "dc4e4fe1281383ea696479862adb7ac0be6c316d9a2514a18cb21acf154de7b2",
+    "tests/test_rank_boundaries.py": "ba04374fa54d661483c949c2a5636e7ab61f423cf4ad2eab0c3146736791fec3"
+  }
+}

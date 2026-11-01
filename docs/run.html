@@ -182,11 +182,12 @@ document.getElementById("run").addEventListener("click", async () => {
      <td class="q">${pct(unp(r.o))} / ${pct(unp(r.v))}</td></tr>`).join("");
 
   // parser asymmetry invalidates everything before any finding is read off
-  const worstAsym = Math.max(...results.map(r => unp(r.v) - unp(r.o)));
-  let flips = 0, considered = 0;
+  const worstAsym = Math.max(...results.map(r => Math.abs(unp(r.v) - unp(r.o))));
+  let flips = 0, considered = 0, tied = 0;
   for(let i=0;i<results.length;i++) for(let j=i+1;j<results.length;j++){
     const before = acc(results[i].o)-acc(results[j].o);
     const after  = acc(results[i].v)-acc(results[j].v);
+    if(before===0 || after===0){ tied++; continue; }
     considered++;
     if(before!==0 && after!==0 && (before>0)!==(after>0)) flips++;
   }
@@ -194,17 +195,20 @@ document.getElementById("run").addEventListener("click", async () => {
   const v = document.getElementById("verdict");
   if(worstAsym > 0.05){
     v.innerHTML = `<b>Unusable.</b> The parser failed ${(worstAsym*100).toFixed(1)} points
-      more often on the perturbed arm. That is indistinguishable from a capability
+      more often in one arm than the other. That is indistinguishable from a capability
       drop and has to be fixed before any of these numbers mean anything.`;
+  } else if(considered===0){
+    v.textContent = "No strict comparable orderings: tied pairs do not establish ranking stability.";
   } else if(flips){
     v.innerHTML = `<b>${flips} of ${considered} orderings flipped.</b> A table that
       reorders when the numbers in the questions change is not a basis for choosing
       a model, whatever caused it.`;
   } else {
-    v.innerHTML = `<b>No ordering flipped</b> — and this run could not have detected
-      one smaller than <b>${(d.flip*100).toFixed(0)} points</b>. That is a statement
+    v.innerHTML = `<b>No ordering flipped</b>. The assumed 80%-power planning target is
+      <b>${(d.flip*100).toFixed(0)} points</b>, not a hard detection limit. That is a statement
       about the sample, not about the leaderboard.`;
   }
+  if(tied) v.append(document.createTextNode(" Tied pairs were excluded; not every pair retained a strict ordering."));
   document.getElementById("power").innerHTML =
     `The literature reports drops up to <b>13 points</b> for the worst-overfitting
      models and about <b>1 point</b> for frontier ones. Detecting 1 point here would

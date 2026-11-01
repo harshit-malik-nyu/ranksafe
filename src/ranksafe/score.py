@@ -38,6 +38,7 @@ would compress exactly the information a buyer needs — *which* pair flipped.
 from __future__ import annotations
 
 import re
+import math
 from dataclasses import dataclass, field
 from itertools import combinations
 
@@ -149,18 +150,37 @@ def rank_stability(results: list[ModelResult],
     ordered in any meaningful sense and counting its flip overstates the
     instability.
     """
+    if not math.isfinite(min_margin) or not 0 <= min_margin <= 1:
+        raise ValueError("min_margin must be finite and in [0,1]")
+    if len({r.model for r in results}) != len(results):
+        raise ValueError("model names must be unique")
+    sizes = set()
+    for r in results:
+        for arm in (r.original, r.variant):
+            if any(type(x) is not int or x < 0 for x in (arm.n, arm.right, arm.unparsed)):
+                raise ValueError("arm counts must be nonnegative integers")
+            if arm.n == 0 or arm.right + arm.unparsed > arm.n:
+                raise ValueError("arms need observations and consistent outcome counts")
+            sizes.add(arm.n)
+    if len(sizes) > 1:
+        raise ValueError("ranking requires equal observed counts across models and arms; verify item identity separately")
     if len(results) < 2:
         return {"models": len(results),
                 "note": "a ranking needs at least two models"}
 
     flips, considered, detail = 0, 0, []
+    original_ties = variant_ties = below_margin = 0
     for a, b in combinations(results, 2):
-        margin = abs(a.original.accuracy - b.original.accuracy)
-        if margin < min_margin:
-            continue
-        considered += 1
         before = a.original.accuracy - b.original.accuracy
         after = a.variant.accuracy - b.variant.accuracy
+        original_ties += int(before == 0)
+        variant_ties += int(after == 0)
+        if before == 0 or after == 0:
+            continue
+        if abs(before) < min_margin:
+            below_margin += 1
+            continue
+        considered += 1
         flipped = (before > 0) != (after > 0) and before != 0 and after != 0
         if flipped:
             flips += 1
@@ -180,20 +200,24 @@ def rank_stability(results: list[ModelResult],
         "models": len(results),
         "pairs_considered": considered,
         "flips": flips,
-        "flip_rate": flips / considered if considered else 0.0,
+        "flip_rate": flips / considered if considered else None,
+        "pairs_tied_original": original_ties,
+        "pairs_tied_variant": variant_ties,
+        "pairs_below_margin": below_margin,
+        "comparison_scope": "Descriptive ordering on supplied counts; tied pairs excluded. Equal counts do not establish matched item identity.",
         "min_margin": min_margin,
         "pairs": detail,
         "power": power,
-        "verdict": _verdict(flips, considered, results, power),
+        "verdict": _verdict(flips, considered, results, power) + (" Tied pairs were excluded; this is not evidence that every pair retained a strict ordering." if original_ties or variant_ties else ""),
     }
 
 
 def _verdict(flips: int, considered: int, results: list[ModelResult],
              power: dict | None = None) -> str:
-    worst = max((r.parser_asymmetry for r in results), default=0.0)
+    worst = max((abs(r.parser_asymmetry) for r in results), default=0.0)
     if worst > 0.05:
         return (f"Unusable: the parser failed {worst*100:.1f} points more often "
-                "on the perturbed arm than the original. That difference is "
+                "in one arm than the other. That difference is "
                 "indistinguishable from a capability drop and has to be fixed "
                 "before any of these numbers mean anything.")
     if considered == 0:
@@ -211,8 +235,8 @@ def _verdict(flips: int, considered: int, results: list[ModelResult],
     # could have been seen, and a run this size usually could not.
     if power:
         floor = power["smallest_detectable_flip"]
-        return (f"No ordering flipped, and this run could not have detected "
-                f"one smaller than {floor*100:.1f} points — so that is a "
+        return (f"No ordering flipped. Under the planning assumptions, the 80%-power "
+                f"effect target is {floor*100:.1f} points, not a hard detection limit. This is a "
                 "statement about the sample, not about the leaderboard. "
                 f"Scores moved by {span}. Detecting a flip the size the "
                 "literature reports needs roughly four times the items of "
